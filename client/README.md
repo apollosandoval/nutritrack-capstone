@@ -32,3 +32,55 @@ Often times the medical care provided to patients with Diabetes is closely tied 
 
 ## User Stories
 
+#### Landing Page
+- As a user, when I arrive at the landing page I see a navigation bar with the option to Login or Register as a new user.
+- Login button renders a corresponding login form.
+- Register button renders a corresponding registration form.
+
+### Professional
+
+#### Dashboard
+###### Layout:
+- As a Professional user I see a list displaying a high-level overview of all of my clients recent statistics.
+- As a professional user, I see a permanent navigation field on the left.
+###### Functionality:
+- As a user, when I click a client card I am navigated to that clients profile page including a more detailed summary.
+
+#### Messages
+###### Layout:
+- As a user, I can see a summary view of all of my messages via the 'inbox' category.
+- As a user, I can see a summary view of all of my messages via the 'sent' category.
+- As a user, I can see a new message form collapsed at the top of the screen.
+###### Functionality:
+- As a user, I can filter my messages by a 'sent' category.
+- As a user, I can reply to an existing message.
+- As a user, I can compose a new message to send to another user.
+
+#### Clients
+
+### User
+
+#### Dashboard
+####### Layout:
+- As a user, when I login I see a banner displaying my current intake broken up into nutritional categories
+- Below the summary banner, I see a list of meal cards corresponding to that day's input
+- As a user, I see a fixed floating button in the bottom right to add new meal cards
+####### Functionality:
+- As a user, I can add new meals via a modal form upon pressing the 'add' button
+- As a user, I can see a detailed view beyond the macroscopic view of nutritional information displayed in a meal card
+
+#### Messages
+###### Layout:
+- As a user, I can see a summary view of all of my messages via the 'inbox' category.
+- As a user, I can see a summary view of all of my messages via the 'sent' category.
+- As a user, I can see a new message form collapsed at the top of the screen.
+###### Functionality:
+- As a user, I can filter my messages by a 'sent' category.
+- As a user, I can reply to an existing message.
+- As a user, I can compose a new message to send to another user.
+
+#### History
+
+#### Allies
+
+#### Settings
