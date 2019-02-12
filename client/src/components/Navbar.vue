@@ -9,6 +9,8 @@
         <v-btn flat router to="/login">Sign In</v-btn>
         <v-btn flat router to="/register">Register</v-btn>
         <v-btn flat router to="/">Sign Out</v-btn>
+        <!-- NOTE: REMOVE JUST FOR TESTING -->
+        <v-btn flat router to="/test">TEST</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
