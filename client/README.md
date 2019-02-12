@@ -57,17 +57,19 @@ Often times the medical care provided to patients with Diabetes is closely tied 
 - As a user, I can compose a new message to send to another user.
 
 #### Clients
+- As a user, I can see a list of all of my existing clients.
+- As a user, when I click a client, I am navigated to a view of their profile page.
 
 ## User
 
 #### Dashboard
-####### Layout:
-- As a user, when I login I see a banner displaying my current intake broken up into nutritional categories
-- Below the summary banner, I see a list of meal cards corresponding to that day's input
-- As a user, I see a fixed floating button in the bottom right to add new meal cards
-####### Functionality:
-- As a user, I can add new meals via a modal form upon pressing the 'add' button
-- As a user, I can see a detailed view beyond the macroscopic view of nutritional information displayed in a meal card
+###### Layout:
+- As a user, when I login I see a banner displaying my current intake broken up into nutritional categories.
+- Below the summary banner, I see a list of meal cards corresponding to that day's input.
+- As a user, I see a fixed floating button in the bottom right to add new meal cards.
+###### Functionality:
+- As a user, I can add new meals via a modal form upon pressing the 'add' button.
+- As a user, I can see a detailed view beyond the macroscopic view of nutritional information displayed in a meal card.
 
 #### Messages
 ###### Layout:
@@ -80,7 +82,17 @@ Often times the medical care provided to patients with Diabetes is closely tied 
 - As a user, I can compose a new message to send to another user.
 
 #### History
+###### Layout:
+- As a user, I can see a summary of my daily intake on prior days.
+- As a user, I can see a detailed summary of my weekly intake.
+- As a user, I can see a detailed summary of my monthly intake.
+###### Functionality:
+- As a user, I can edit the content of a specific meal.
 
 #### Allies
+- As a user, I can see a list of the people I am working with to attain my goals.
+- As a user, I can click a member of the list and send them a new message.
 
 #### Settings
+- As a user, I can edit my personal display settings.
+- As a user, I can modify my personal nutritonal goals in order to meet my needs.
