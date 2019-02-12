@@ -37,7 +37,7 @@ Often times the medical care provided to patients with Diabetes is closely tied 
 - Login button renders a corresponding login form.
 - Register button renders a corresponding registration form.
 
-### Professional
+## Professional
 
 #### Dashboard
 ###### Layout:
@@ -58,7 +58,7 @@ Often times the medical care provided to patients with Diabetes is closely tied 
 
 #### Clients
 
-### User
+## User
 
 #### Dashboard
 ####### Layout:
