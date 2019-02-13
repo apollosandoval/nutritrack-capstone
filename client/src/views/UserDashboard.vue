@@ -23,7 +23,7 @@
     <v-dialog
       v-model="dialog"
     >
-      <new-meal-form />
+      <new-meal-dialog />
     </v-dialog>
   </v-container>
 </template>
@@ -31,13 +31,13 @@
 <script>
 import ProfileBanner from '@/components/ProfileBanner'
 import MealCard from '@/components/MealCard'
-import NewMealForm from '@/components/NewMealForm'
+import NewMealDialog from '@/components/NewMealDialog'
 
 export default {
   components: {
     'profile-banner': ProfileBanner,
     'meal-card': MealCard,
-    'new-meal-form': NewMealForm,
+    'new-meal-dialog': NewMealDialog,
   },
   data() {
     return {
