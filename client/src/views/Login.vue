@@ -26,7 +26,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <!-- TODO: add @click -->
-            <v-btn>Sign In</v-btn>
+            <v-btn @click="submit">Sign In</v-btn>
             <!-- TODO: add rerouting -->
             <v-btn>Register</v-btn>
           </v-card-actions>
@@ -56,6 +56,12 @@ export default {
   methods: {
     submit: function() {
       // TODO: fill in Login submit
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password,
+        })
+      }
     }
   }
 }

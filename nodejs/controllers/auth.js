@@ -1,10 +1,12 @@
-const knex = require('@/db/knex')
+const knex = require('../db/knex')
 
 module.exports = {
 
   getAuthUser: (req, res) => {
-    let user = {};
-    res.send(user);
+    knex('users').where('email', req.params.email)
+      .then( data => {
+        res.send(data);
+      })
   },
 
   getAuthPro: (req, res) => {
