@@ -16,6 +16,6 @@ export default {
   name: 'App',
   components: {
     'nav-bar': Navbar,
-  }
+  },
 }
 </script>
