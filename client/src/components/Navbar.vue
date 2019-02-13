@@ -23,7 +23,17 @@
       dark
     >
       <v-layout column align-center>
-
+        <v-flex class="mt-5">
+          <v-avatar size="250">
+            <img src="https://i.imgur.com/ET0WJCb.png" >
+          </v-avatar>
+        </v-flex>
+        <v-flex>
+          <v-list>
+            <v-list-tile-title>Joe Trainer</v-list-tile-title>
+            <v-list-tile-sub-title>JoeTrainer@email.com</v-list-tile-sub-title>
+          </v-list>
+        </v-flex>
       </v-layout>
       <v-spacer></v-spacer>
       <v-divider></v-divider>
