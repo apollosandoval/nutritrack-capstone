@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import Landing from '@/views/Landing'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
-// NOTE: COMPONENT BELOW IS CURRENTLY BEING TESTED
 import UserDashboard from '@/views/UserDashboard'
+// NOTE: COMPONENT BELOW IS CURRENTLY BEING TESTED
+import ProDashboard from '@/views/ProDashboard'
 
 Vue.use(Router)
 
@@ -23,11 +24,16 @@ export default new Router({
       name: "Register",
       component: Register
     },
+    {
+      path: "/user",
+      name: "User",
+      component: UserDashboard
+    },
     // NOTE: COMPONENT BELOW IS CURRENTLY BEING TESTED
     {
       path: "/test",
       name: "Test",
-      component: UserDashboard
+      component: ProDashboard
     },
     {
       path: "/",
