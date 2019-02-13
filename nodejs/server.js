@@ -1,4 +1,3 @@
-const express = requier('express');
 const express = require('express');
 // parses incoming request bodies and makes them available under `req.body`
 const bodyParser = require('body-parser');
