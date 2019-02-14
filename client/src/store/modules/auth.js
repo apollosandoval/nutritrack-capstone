@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '@/router/router'
+const URL = require('./api-variables').URL;
 
 export default {
   state: {
@@ -21,7 +22,7 @@ export default {
     login: async function(context, user) {
       const { email } = user;
       try {
-        const res = await axios.get('http://localhost:8082/login/' + email);
+        const res = await axios.get(URL + email);
         context.commit('LOGIN', {user: res.data});
         router.push({path: "/user"});
       } catch(err) {
