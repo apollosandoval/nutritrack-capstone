@@ -1,2 +1,3 @@
 node_modules/
 axios/config.js
+.env

@@ -1,3 +1,5 @@
+// import dotenv package in order to mock development environment in .env file
+require('dotenv').config();
 const express = require('express');
 // parses incoming request bodies and makes them available under `req.body`
 const bodyParser = require('body-parser');

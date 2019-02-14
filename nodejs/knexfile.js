@@ -4,7 +4,7 @@ module.exports = {
     client: 'pg',
     connection: {
       database: 'nutritrack',
-      host: 'localhost'
+      host: process.env.DB_HOST,
     },
     migrations: {
       directory: __dirname + '/db/migrations',
