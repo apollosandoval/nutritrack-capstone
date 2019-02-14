@@ -7,21 +7,31 @@ export default {
     authenticated: false,
   },
   
-  getters: {},
+  getters: {
+    auth: function(state) {
+      return state.user;
+    },
+    authenticated: function(state) {
+      return state.authenticated;
+    }
+  },
 
   actions: {
     register: function() {},
     login: async function(context, user) {
-      const { email, password } = user;
+      const { email } = user;
       try {
-        const res = await axios.get('https://localhost:8082/login/' + email);
-        context.commit('LOGIN', res);
+        const res = await axios.get('http://localhost:8082/login/' + email);
+        context.commit('LOGIN', {user: res.data});
         router.push({path: "/user"});
       } catch(err) {
         throw new Error(err);
       }
     },
-    logout: function() {},
+    logout: function(context) {
+      context.commit("LOGOUT");
+      router.push({path: "/login"});
+    },
   },
 
   mutations: {
@@ -29,7 +39,7 @@ export default {
       state.user = payload.user;
       state.authenticated = true;
     },
-    LOGOUT: function() {
+    LOGOUT: function(state) {
       state.user = [];
       state.authenticated = false;
     },

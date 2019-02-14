@@ -6,10 +6,12 @@
       <v-toolbar-title>Nutritrack</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- TODO: make toolbar nav display auth based -->
-      <v-toolbar-items>
+      <v-toolbar-items v-if="!authenticated">
         <v-btn flat router to="/login">Sign In</v-btn>
         <v-btn flat router to="/register">Register</v-btn>
-        <v-btn flat router to="/">Sign Out</v-btn>
+      </v-toolbar-items>
+      <v-toolbar-items v-else>
+        <v-btn @click="logout">Sign Out</v-btn>
         <v-btn flat router to="/user">User</v-btn>
         <!-- NOTE: REMOVE JUST FOR TESTING -->
         <v-btn flat router to="/test">TEST</v-btn>
@@ -30,14 +32,30 @@
         </v-flex>
         <v-flex>
           <v-list>
-            <v-list-tile-title>Joe Trainer</v-list-tile-title>
-            <v-list-tile-sub-title>JoeTrainer@email.com</v-list-tile-sub-title>
+            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ user.email }}</v-list-tile-sub-title>
           </v-list>
         </v-flex>
       </v-layout>
       <v-spacer></v-spacer>
       <v-divider></v-divider>
-      <v-list>
+      <!-- Links for pro users -->
+      <v-list v-if="user.pro">
+        <v-list-tile
+          v-for="link in links.pro"
+          :key="`nav-${link.name}`"
+          router
+          :to="link.route"
+          @click="drawer=!drawer"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{ link.name }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <!-- Links for regular users -->
+      <v-list v-else>
         <v-list-tile
           v-for="link in links.user"
           :key="`nav-${link.name}`"
@@ -52,7 +70,6 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-
   </div>
 </template>
 
@@ -79,7 +96,18 @@ export default {
       }
     };
   },
-  methods: {},
-  computed: {}
+  methods: {
+    logout: function() {
+      this.$store.dispatch("logout");
+    }
+  },
+  computed: {
+    authenticated: function() {
+      return this.$store.getters.authenticated;
+    },
+    user: function() {
+      return this.$store.getters.auth;
+    }
+  }
 }
 </script>
