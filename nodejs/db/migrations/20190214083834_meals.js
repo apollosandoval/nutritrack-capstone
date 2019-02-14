@@ -1,6 +1,7 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('meals', () => {
+  return knex.schema.createTable('meals', table => {
     table.increments();
+    table.timestamps(true, true);
   });
 };
 

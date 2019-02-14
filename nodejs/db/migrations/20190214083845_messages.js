@@ -1,6 +1,7 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('messages', () => {
+  return knex.schema.createTable('messages', table => {
     table.increments();
+    table.timestamps(true, true);
   });
 };
 

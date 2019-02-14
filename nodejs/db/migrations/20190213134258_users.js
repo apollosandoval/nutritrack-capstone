@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.string('name');
     table.string('email');
     table.boolean('pro').defaultTo(false);
+    table.timestamps(true, true);
   })
 };
 

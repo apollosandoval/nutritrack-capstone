@@ -2,7 +2,7 @@
   <div>
     <v-toolbar dark app>
       <!-- TODO: Insert side icon for side drawer -->
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="authenticated" @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Nutritrack</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- TODO: make toolbar nav display auth based -->
