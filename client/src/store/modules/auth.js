@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from '@/router/router'
-const URL = require('./api-variables').URL;
+const URL = require('../api-variables').URL;
 
 export default {
   state: {
@@ -22,9 +22,14 @@ export default {
     login: async function(context, user) {
       const { email } = user;
       try {
-        const res = await axios.get(URL + email);
+        const res = await axios.get(`${URL}/login/${email}`);
+        res.data.username = res.data.name.split(" ").join(".").toLowerCase();
         context.commit('LOGIN', {user: res.data});
-        router.push({path: "/user"});
+        if (res.data.pro) {
+          router.push({path: `/pro/${res.data.username}`});
+        } else {
+          router.push({path: `/${res.data.username}`});
+        }
       } catch(err) {
         throw new Error(err);
       }

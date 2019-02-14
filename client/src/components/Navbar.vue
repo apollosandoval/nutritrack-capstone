@@ -45,7 +45,7 @@
           v-for="link in links.pro"
           :key="`nav-${link.name}`"
           router
-          :to="link.route"
+          :to="`/pro/${username}/${link.route}`"
           @click="drawer=!drawer"
         >
           <v-list-tile-action>
@@ -80,18 +80,18 @@ export default {
       drawer: false,
       links: {
         pro: [
-          {name: "Dashboard", icon: "dashboard", route: "/pro"},
-          {name: "Inbox", icon: "move_to_inbox", route: "/inbox"},
-          {name: "Sent", icon: "send", route: "/sent"},
-          {name: "Clients", icon: "people", route: "/"},
-          {name: "Settings", icon: "settings", route: "/settings"},
+          {name: "Dashboard", icon: "dashboard", route: ""},
+          {name: "Inbox", icon: "move_to_inbox", route: "inbox"},
+          {name: "Sent", icon: "send", route: "sent"},
+          {name: "Clients", icon: "people", route: "clients"},
+          {name: "Settings", icon: "settings", route: "settings"},
         ],
         user: [
-          {name: "Dashboard", icon: "dashboard", route: "/user"},
-          {name: "Inbox", icon: "move_to_inbox", route: "/inbox"},
-          {name: "Sent", icon: "send", route: "/sent"},
-          {name: "Allies", icon: "people", route: "/"},
-          {name: "Settings", icon: "settings", route: "/settings"},
+          {name: "Dashboard", icon: "dashboard", route: "user"},
+          {name: "Inbox", icon: "move_to_inbox", route: "inbox"},
+          {name: "Sent", icon: "send", route: "sent"},
+          {name: "Allies", icon: "people", route: "allies"},
+          {name: "Settings", icon: "settings", route: "settings"},
         ],
       }
     };
@@ -107,6 +107,10 @@ export default {
     },
     user: function() {
       return this.$store.getters.auth;
+    },
+    username: function() {
+      const { name } = this.$store.getters.auth;
+      return name.split(" ").join(".");
     }
   }
 }

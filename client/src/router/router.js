@@ -5,8 +5,9 @@ import Landing from '@/views/Landing'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import UserDashboard from '@/views/UserDashboard'
-// NOTE: COMPONENT BELOW IS CURRENTLY BEING TESTED
 import ProDashboard from '@/views/ProDashboard'
+import Clients from '@/views/Clients'
+import Allies from '@/views/Allies'
 
 Vue.use(Router)
 
@@ -25,15 +26,24 @@ export default new Router({
       component: Register
     },
     {
-      path: "/user",
+      path: "/:username",
       name: "User",
       component: UserDashboard
     },
-    // NOTE: COMPONENT BELOW IS CURRENTLY BEING TESTED
     {
-      path: "/test",
-      name: "Test",
+      path: "/:username/allies",
+      name: "Allies",
+      component: Allies,
+    },
+    {
+      path: "/pro/:username",
+      name: "Pro",
       component: ProDashboard
+    },
+    {
+      path: "/pro/:username/clients",
+      name: "Clients",
+      component: Clients
     },
     {
       path: "/",
