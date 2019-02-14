@@ -3,7 +3,7 @@ const knex = require('../db/knex')
 module.exports = {
 
   getAuthUser: (req, res) => {
-    knex('users').where('email', req.params.email)
+    knex('users').where('email', req.params.email).first()
       .then( data => {
         res.send(data);
       })
