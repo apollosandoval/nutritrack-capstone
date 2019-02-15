@@ -12,9 +12,6 @@
       </v-toolbar-items>
       <v-toolbar-items v-else>
         <v-btn @click="logout">Sign Out</v-btn>
-        <v-btn flat router to="/user">User</v-btn>
-        <!-- NOTE: REMOVE JUST FOR TESTING -->
-        <v-btn flat router to="/test">TEST</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -60,7 +57,7 @@
           v-for="link in links.user"
           :key="`nav-${link.name}`"
           router
-          :to="link.route"
+          :to="`/${username}/${link.route}`"
           @click="drawer=!drawer"
         >
           <v-list-tile-action>
@@ -87,7 +84,7 @@ export default {
           {name: "Settings", icon: "settings", route: "settings"},
         ],
         user: [
-          {name: "Dashboard", icon: "dashboard", route: "user"},
+          {name: "Dashboard", icon: "dashboard", route: ""},
           {name: "Inbox", icon: "move_to_inbox", route: "inbox"},
           {name: "Sent", icon: "send", route: "sent"},
           {name: "Allies", icon: "people", route: "allies"},
@@ -110,7 +107,10 @@ export default {
     },
     username: function() {
       const { name } = this.$store.getters.auth;
-      return name.split(" ").join(".");
+      if (name) {
+        return name.split(" ").join(".").toLowerCase();
+      }
+      return '';
     }
   }
 }

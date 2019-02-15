@@ -12,6 +12,6 @@ module.exports = {
   getAuthPro: (req, res) => {
     let pro = {};
     res.send(pro);
-  }
+  },
 
 };

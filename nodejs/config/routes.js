@@ -1,16 +1,13 @@
 // import route handlers
-const auth = require('../controllers/auth');
+const auth = require('../controllers/auth')
+const users = require('../controllers/users')
 
 module.exports = (app) => {
 
-  // routes
-  app.get("/login/:email", auth.getAuthUser),
-  app.get("/", (req,res) => {
-    try {
-      res.send("Hello World!");
-    } catch(err) {
-      throw new Error(err);
-    }
-  })
+  // routes for auth
+  app.get("/login/:email", auth.getAuthUser);
+  
+  // routes for users
+  app.get("/pro/:user_id/clients", users.getAllClients);
 
-}
+};

@@ -8,6 +8,7 @@ import UserDashboard from '@/views/UserDashboard'
 import ProDashboard from '@/views/ProDashboard'
 import Clients from '@/views/Clients'
 import Allies from '@/views/Allies'
+import Settings from '@/views/Settings'
 
 Vue.use(Router)
 
@@ -26,24 +27,29 @@ export default new Router({
       component: Register
     },
     {
-      path: "/:username",
-      name: "User",
-      component: UserDashboard
-    },
-    {
       path: "/:username/allies",
       name: "Allies",
       component: Allies,
     },
     {
-      path: "/pro/:username",
-      name: "Pro",
-      component: ProDashboard
+      path: "/:username",
+      name: "User",
+      component: UserDashboard
     },
     {
       path: "/pro/:username/clients",
       name: "Clients",
       component: Clients
+    },
+    {
+      path: "/pro/:username/settings",
+      name: "Settings",
+      component: Settings
+    },
+    {
+      path: "/pro/:username",
+      name: "Pro",
+      component: ProDashboard
     },
     {
       path: "/",
@@ -52,3 +58,6 @@ export default new Router({
     },
   ]
 })
+
+// TODO: figure out if I need to nest routes
+// TODO: remove 'pro' from url labels

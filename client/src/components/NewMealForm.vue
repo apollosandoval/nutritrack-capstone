@@ -22,6 +22,11 @@ export default {
     return {
       items: ["Snack", "Breakfast", "Lunch", "Dinner"],
     }
-  }
+  },
+  methods: {
+    submit: function() {
+      // TODO: handle submit of Dining In Tab
+    },
+  },
 }
 </script>

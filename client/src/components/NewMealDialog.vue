@@ -42,7 +42,11 @@ export default {
       items: ["Snack", "Breakfast", "Lunch", "Dinner"],
     }
   },
-  methods: {},
+  methods: {
+    submit: function() {
+      // TODO: handle submit of Eating Out Tab
+    },
+  },
   computed: {},
 }
 </script>

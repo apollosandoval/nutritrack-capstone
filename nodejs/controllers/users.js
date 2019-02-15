@@ -1,0 +1,14 @@
+const knex = require('../db/knex')
+
+module.exports = {
+
+  getAllClients: (req, res) => {
+    knex('users')
+      .join('allies', 'allies.client', '=', 'users.id')
+      .where('allies.professional', req.params.user_id)
+      .then( data => {
+        res.send(data);
+      })
+  },
+
+};
