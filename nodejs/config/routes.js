@@ -9,5 +9,6 @@ module.exports = (app) => {
   
   // routes for users
   app.get("/pro/:user_id/clients", users.getAllClients);
+  app.get("/:user_id/allies", users.getAllAllies);
 
 };

@@ -10,5 +10,13 @@ module.exports = {
         res.send(data);
       })
   },
+  getAllAllies: (req, res) => {
+    knex('users')
+      .join('allies', 'allies.professional', '=', 'users.id')
+      .where('allies.client', req.params.user_id)
+      .then( data => {
+        res.send(data);
+      })
+  }
 
 };
