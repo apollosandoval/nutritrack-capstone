@@ -10,16 +10,21 @@
       <!-- Eating Out tab items -->
       <v-tab-item>
         <v-card>
-          <v-form>
-            <v-select
-              :items="items"
-              outline
-              label="Select A Meal"
-            ></v-select>
-            <v-text-field
-              prepend-inner-icon="search"
-            ></v-text-field>
-          </v-form>
+          <v-card-text>
+            <v-form>
+              <v-select
+                :items="items"
+                outline
+                prepend-inner-icon="kitchen"
+                label="Select A Meal"
+              ></v-select>
+              <v-text-field
+                prepend-inner-icon="search"
+                label="Item 1"
+                placeholder="Find your item"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
         </v-card>
       </v-tab-item>
       <!-- Dining in tab items -->

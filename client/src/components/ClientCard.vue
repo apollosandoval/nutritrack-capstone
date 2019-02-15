@@ -1,7 +1,7 @@
 <template>
   <v-flex>
     <v-card>
-      <!-- Insert Graph component here -->
+      <!-- TODO: Insert Graph component here -->
       <v-card-actions>
         <v-list-tile class="grow">
           <v-list-tile-avatar color="grey darken-3">
@@ -12,7 +12,9 @@
             </v-img>
           </v-list-tile-avatar>
 
-          <v-list-tile-content></v-list-tile-content>
+          <v-list-tile-content>
+            <!-- TODO: Fill in client details -->
+          </v-list-tile-content>
 
           <v-layout></v-layout>
         </v-list-tile>

@@ -32,6 +32,11 @@ export default new Router({
       component: Allies,
     },
     {
+      path: "/:username/settings",
+      name: "Settings",
+      component: Settings
+    },
+    {
       path: "/:username",
       name: "User",
       component: UserDashboard

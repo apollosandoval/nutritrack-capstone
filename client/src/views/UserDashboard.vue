@@ -22,6 +22,7 @@
     </v-btn>
     <v-dialog
       v-model="dialog"
+      max-width="500"
     >
       <new-meal-dialog />
     </v-dialog>

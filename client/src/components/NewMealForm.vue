@@ -1,18 +1,25 @@
 <template>
   <v-card>
-    <v-form>
-      <v-select
-        :items="items"
-        outline
-        label="Select A Meal"
-      ></v-select>
-      <v-text-field
-        prepend-inner-icon="search"
-      ></v-text-field>
-      <v-text-field
-        prepend-inner-icon="search"
-      ></v-text-field>
-    </v-form>
+    <v-card-text>
+      <v-form>
+        <v-select
+          :items="items"
+          outline
+          prepend-inner-icon="kitchen"
+          label="Select Your Meal"
+        ></v-select>
+        <v-text-field
+          prepend-inner-icon="search"
+          label="Item 1"
+          placeholder="Enter an item"
+        ></v-text-field>
+        <v-text-field
+          prepend-inner-icon="search"
+          label="Item 2"
+          placeholder="Enter an item"
+        ></v-text-field>
+      </v-form>
+    </v-card-text>
   </v-card>
 </template>
 
