@@ -8,7 +8,7 @@ export default {
   },
 
   getters: {
-    clients: function(state) {
+    connections: function(state) {
       return state.users;
     }
   },

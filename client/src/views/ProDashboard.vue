@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     clients: function() {
-      return this.$store.getters.clients;
+      return this.$store.getters.connections;
     },
   },
 }

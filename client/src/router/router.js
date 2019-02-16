@@ -8,6 +8,7 @@ import UserDashboard from '@/views/UserDashboard'
 import ProDashboard from '@/views/ProDashboard'
 import Clients from '@/views/Clients'
 import Allies from '@/views/Allies'
+import Messages from '@/views/Messages'
 import Settings from '@/views/Settings'
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
       path: "/:username/allies",
       name: "Allies",
       component: Allies,
+    },
+    {
+      path: "/:username/inbox",
+      name: "Inbox",
+      component: Messages,
     },
     {
       path: "/:username/settings",

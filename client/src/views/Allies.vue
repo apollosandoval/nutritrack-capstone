@@ -11,12 +11,12 @@
       <v-flex>
         <v-card>
           <v-list two-line>
-            <v-list-tile v-for="n in 2" :key="`tile-${n}`">
+            <v-list-tile v-for="allie in allies" :key="`tile-${allie.name}`">
               <v-list-tile-avatar>
                 <v-icon>account_circle</v-icon>
               </v-list-tile-avatar>
               <v-list-tile-content>
-                <v-list-tile-title>Trainer Name</v-list-tile-title>
+                <v-list-tile-title>{{ allie.name }}</v-list-tile-title>
                 <v-list-tile-sub-title>Institution Name</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
@@ -40,6 +40,10 @@ export default {
   mounted() {
     this.$store.dispatch('getAllAllies', this.$store.getters.auth);
   },
-  computed: {}
+  computed: {
+    allies: function() {
+      return this.$store.getters.connections;
+    }
+  }
 }
 </script>
