@@ -5,9 +5,7 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('conversations').insert([
-        {subject: 'Hey!', message_id: 1},
-        {subject: 'Hey!', message_id: 2},
-        {subject: 'Hey!', message_id: 3},
+        {subject: 'Hey!', from: 1, to: 4},
       ]);
     });
 };

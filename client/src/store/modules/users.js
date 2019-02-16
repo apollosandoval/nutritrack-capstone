@@ -46,6 +46,7 @@ export default {
       const users = {};
       payload.forEach(user => users[user.id] = user)
       state.users = users;
+      state.isFetching = false;
     },
   },
 

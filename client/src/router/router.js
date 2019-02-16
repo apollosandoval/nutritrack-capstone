@@ -39,7 +39,7 @@ export default new Router({
       component: Inbox,
     },
     {
-      path: "/:username/messages",
+      path: "/:username/inbox/:conversationId",
       name: "Messages",
       component: Messages
     },

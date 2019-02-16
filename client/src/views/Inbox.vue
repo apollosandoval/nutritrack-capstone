@@ -2,21 +2,26 @@
   <v-container>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8>
-        <!-- TODO: Insert empty inbox view with v-if -->
-        <v-card>
+        <!-- render card if no messages in inbox yet -->
+        <v-card v-if="Object.keys(inbox).length === 0">
+          <v-list-tile>
+            <v-list-tile-content>No Messages Yet.</v-list-tile-content>
+          </v-list-tile>
+        </v-card>
+        <!-- Otherwise display inbox -->
+        <v-card v-else>
           <v-list>
-            <template v-for="n in 3">
-              <!-- TODO: make routing dynamic -->
+            <template v-for="conversation in inbox">
               <v-list-tile
-                :key="`tile-${n}`"
+                :key="`conversation-${conversation.id}`"
                 router
-                to="/oscar.sandoval/messages"
+                :to="`/${username}/inbox/${conversation.id}`"
               >
                 <v-list-tile-action>
                   <v-checkbox></v-checkbox>
                 </v-list-tile-action>
-                <v-list-tile-content>From</v-list-tile-content>
-                <v-list-tile-content>Subject</v-list-tile-content>
+                <v-list-tile-content>FROM</v-list-tile-content>
+                <v-list-tile-content>{{ conversation.subject }}</v-list-tile-content>
               </v-list-tile>
             </template>
           </v-list>
@@ -28,11 +33,24 @@
 
 <script>
 export default {
-  // TODO: get messages by user_id
   data() {
     return {};
   },
+  mounted() {
+    this.$store.dispatch('getInbox', this.$store.getters.auth);
+  },
   methods: {},
-  computed: {},
+  computed: {
+    username: function() {
+      const { name } = this.$store.getters.auth;
+      if (name) {
+        return name.split(" ").join(".").toLowerCase();
+      }
+      return '';
+    },
+    inbox: function() {
+      return this.$store.getters.inbox;
+    },
+  },
 }
 </script>

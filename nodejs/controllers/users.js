@@ -10,6 +10,7 @@ module.exports = {
         res.send(data);
       })
   },
+  
   getAllAllies: (req, res) => {
     knex('users')
       .join('allies', 'allies.professional', '=', 'users.id')

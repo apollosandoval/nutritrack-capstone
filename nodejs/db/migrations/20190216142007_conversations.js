@@ -2,8 +2,19 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('conversations', table => {
     table.increments();
-    table.string('subject');
-    table.integer('message_id');
+    table.string('subject').defaultTo('No Subject');
+    table.integer('from')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .index();
+    table.integer('to')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .index();
     table.timestamps(true, true);
   })
 };
