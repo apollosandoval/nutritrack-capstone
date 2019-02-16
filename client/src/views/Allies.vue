@@ -20,7 +20,20 @@
                 <v-list-tile-sub-title>Institution Name</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-icon>chat_bubble</v-icon>
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  left
+                  min-width="500"
+                >
+                  <v-btn
+                    slot="activator"
+                    flat
+                  >
+                    <v-icon>chat_bubble</v-icon>
+                  </v-btn>
+                  <new-message-form />
+                </v-menu>
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
@@ -33,9 +46,16 @@
 </template>
 
 <script>
+import NewMessageForm from '@/components/NewMessageForm'
+
 export default {
+  components: {
+    'new-message-form': NewMessageForm,
+  },
   data() {
-    return {};
+    return {
+      menu: false,
+    };
   },
   mounted() {
     this.$store.dispatch('getAllAllies', this.$store.getters.auth);
