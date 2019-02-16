@@ -7,8 +7,21 @@
             <v-toolbar-title>Settings</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <!-- TODO: add settings form -->
+            <v-text-field
+              label="Name"
+            ></v-text-field>
+            <v-text-field
+              label="Email"
+            ></v-text-field>
           </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <!-- TODO: add submit handler -->
+            <v-btn>Submit</v-btn>
+            <v-spacer></v-spacer>
+            <!-- TODO: add handler to cancel changes -->
+            <v-btn>Cancel</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -22,7 +35,7 @@ export default {
     return {};
   },
   methods: {
-    // TODO: write submit method
+    // TODO: POST new UserSettings
     submit: function() {},
   },
   computed: {}

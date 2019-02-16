@@ -8,6 +8,7 @@ import UserDashboard from '@/views/UserDashboard'
 import ProDashboard from '@/views/ProDashboard'
 import Clients from '@/views/Clients'
 import Allies from '@/views/Allies'
+import Inbox from '@/views/Inbox'
 import Messages from '@/views/Messages'
 import Settings from '@/views/Settings'
 
@@ -35,7 +36,12 @@ export default new Router({
     {
       path: "/:username/inbox",
       name: "Inbox",
-      component: Messages,
+      component: Inbox,
+    },
+    {
+      path: "/:username/messages",
+      name: "Messages",
+      component: Messages
     },
     {
       path: "/:username/settings",

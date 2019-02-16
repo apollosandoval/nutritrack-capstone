@@ -38,10 +38,13 @@ export default {
       searchTerm: ''
     }
   },
-  mounted() {},
+  mounted() {
+    this.$store.dispatch('getAllClients', this.$store.getters.auth);
+  },
   computed: {
-    // TODO: retrieve a list of all of my clients
-    clients: function() {},
+    clients: function() {
+      return this.$store.getters.connections;
+    },
   },
 }
 </script>

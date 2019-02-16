@@ -20,6 +20,7 @@
                 <v-list-tile-sub-title>Institution Name</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
+                <!-- Creates pop-over effect of NewMessageForm when clicking btn -->
                 <v-menu
                   v-model="menu"
                   :close-on-content-click="false"

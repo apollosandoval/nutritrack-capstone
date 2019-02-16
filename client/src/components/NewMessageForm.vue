@@ -24,9 +24,11 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
+      <!-- TODO: make button submits -->
       <v-btn flat>Send</v-btn>
       <v-spacer></v-spacer>
       <v-btn flat>
+        <!-- TODO: make button clear message and close window -->
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-actions>
