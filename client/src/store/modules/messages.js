@@ -4,6 +4,7 @@ const URL = require('../api-variables').URL;
 export default {
   state: {
     conversations: {},
+    messages: {},
     isFetching: false,
   },
 
@@ -11,14 +12,27 @@ export default {
     inbox: function(state) {
       return state.conversations;
     },
+    messagesById: (state) => (conversation_id) => {
+      return state.messages[conversation_id];
+    }
   },
 
   actions: {
     getInbox: async function(context, user) {
       try {
         context.commit('REQUEST_MESSAGES');
-        const res = await axios.get(`${URL}/${user.id}/inbox`)
+        const res = await axios.get(`${URL}/${user.id}/inbox`);
         context.commit('RECEIVE_INBOX', res.data);
+      } catch(err) {
+        context.commit('REQUEST_MESSAGES');
+        throw new Error(err);
+      }
+    },
+    getMessagesById: async function(context, {user, conversationId}) {
+      try {
+        context.commit('REQUEST_MESSAGES');
+        const res = await axios.get(`${URL}/${user.id}/inbox/${conversationId}`)
+        context.commit('RECEIVE_MESSAGES',{messages: res.data, conversationId});
       } catch(err) {
         context.commit('REQUEST_MESSAGES');
         throw new Error(err);
@@ -39,7 +53,13 @@ export default {
       state.conversations = conversations;
       state.isFetching = false;
     },
-    RECEIVE_MESSAGES: function() {},
+    RECEIVE_MESSAGES: function(state, payload) {
+      state.isFetching = false;
+      state.messages = {
+        ...state.messages,
+        [payload.conversationId]: payload.messages,
+      }
+    },
   }
 
 }

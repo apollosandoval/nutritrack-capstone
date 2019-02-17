@@ -59,8 +59,18 @@ export default new Router({
       component: Clients
     },
     {
+      path: "/pro/:username/inbox",
+      name: "ProInbox",
+      component: Inbox,
+    },
+    {
+      path: "/pro/:username/inbox/:conversationId",
+      name: "Messages",
+      component: Messages
+    },
+    {
       path: "/pro/:username/settings",
-      name: "Settings",
+      name: "ProSettings",
       component: Settings
     },
     {

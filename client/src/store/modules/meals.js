@@ -14,12 +14,10 @@ export default {
   },
 
   actions: {
-    // TODO: GET all meals by user id and day
     getTodaysMeals: async function(context, {user, date}) {
       try {
         context.commit('REQUEST_MEALS');
         const res = await axios.get(`${URL}/${user.id}/meals/${date}`);
-        console.log('response: ', res.data)
         context.commit('RECEIVE_MEALS_BY_DATE', res.data);
       } catch(err) {
         context.commit('REQUEST_MEALS');

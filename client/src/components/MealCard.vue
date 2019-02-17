@@ -7,27 +7,27 @@
         </v-flex>
         <v-flex xs7>
           <v-card flat>
-            <v-card-title>Breakfast</v-card-title>
+            <v-card-title>{{ meal.meal }}</v-card-title>
             <v-divider></v-divider>
             <v-list dense>
               <v-list-tile>
                 <v-list-tile-content>Calories:</v-list-tile-content>
-                <v-list-tile-content class="align-end">1000</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ meal.calories }}</v-list-tile-content>
               </v-list-tile>
 
               <v-list-tile>
                 <v-list-tile-content>Fat:</v-list-tile-content>
-                <v-list-tile-content class="align-end">10</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ meal.fat }}</v-list-tile-content>
               </v-list-tile>
 
               <v-list-tile>
                 <v-list-tile-content>Protein:</v-list-tile-content>
-                <v-list-tile-content class="align-end">10</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ meal.protein }}</v-list-tile-content>
               </v-list-tile>
 
               <v-list-tile>
                 <v-list-tile-content>Carbohydrates:</v-list-tile-content>
-                <v-list-tile-content class="align-end">10</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ meal.carbs }}</v-list-tile-content>
               </v-list-tile>
             </v-list>
           </v-card>
@@ -39,6 +39,6 @@
 
 <script>
 export default {
-  
+  props: ['meal'],
 }
 </script>

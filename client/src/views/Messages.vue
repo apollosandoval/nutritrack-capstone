@@ -7,7 +7,7 @@
             <v-list-tile-action>
               <v-icon>arrow_back</v-icon>
             </v-list-tile-action>
-            <v-list-tile-content>Conversation Subject</v-list-tile-content>
+            <v-list-tile-content>{{ conversation.subject }}</v-list-tile-content>
             <v-spacer></v-spacer>
             <!-- NOTE: delete if can't get right aligned -->
             <v-list-tile-action>
@@ -15,12 +15,11 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-toolbar>
-        <template v-for="n in 3">
-          <v-card :key="`message-${n}`">
+        <template v-for="message in messages">
+          <v-card :key="`message-${message.id}`">
             <v-card-title></v-card-title>
             <v-card-text>
-              This is some sample text that I'm using to test the working features of my
-              messages card.
+              {{ message.content }}
             </v-card-text>
           </v-card>
         </template>
@@ -31,6 +30,19 @@
 
 <script>
 export default {
-  // TODO: retrieve messages corresponding to conversation id
+  mounted() {
+    this.$store.dispatch('getMessagesById', {
+      user: this.$store.getters.auth,
+      conversationId: this.$route.params.conversationId,
+    })
+  },
+  computed: {
+    messages: function() {
+      return this.$store.getters.messagesById(this.$route.params.conversationId)
+    },
+    conversation: function() {
+      return this.$store.getters.inbox[this.$route.params.conversationId];
+    }
+  }
 }
 </script>

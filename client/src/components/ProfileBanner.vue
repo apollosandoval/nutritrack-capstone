@@ -23,6 +23,7 @@
 
 <script>
 export default {
-  
+  // TODO: compute daily nutritional Info for banner
+
 }
 </script>

@@ -14,6 +14,7 @@
 
           <v-list-tile-content>
             <!-- TODO: Fill in client details -->
+            <v-list-tile-text>{{ client.name }}</v-list-tile-text>
           </v-list-tile-content>
 
           <v-layout></v-layout>
@@ -25,6 +26,6 @@
 
 <script>
 export default {
-  
+  props: ['client'],
 }
 </script>

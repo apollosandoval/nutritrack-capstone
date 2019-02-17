@@ -5,6 +5,7 @@
       <client-card
         v-for="(client, key) in clients"
         :key="`client-${key}`"
+        :client="client"
       ></client-card>
 
     </v-layout>

@@ -8,7 +8,7 @@
     <v-layout column>
       <template v-for="(meal, index) of today">
         <v-flex :key="`meal-${index}`">
-          <meal-card></meal-card>
+          <meal-card :meal="meal"></meal-card>
         </v-flex>
       </template>
     </v-layout>
@@ -56,13 +56,12 @@ export default {
       // TODO: change hard coded date
       date: date.toDateString(),
     });
+    this.$store.dispatch('getAllAllies', this.$store.getters.auth);
   },
   computed: {
-    // TODO: compute list of meal cards
     today: function() {
       return this.$store.getters.meals;
     }
-    // TODO: compute daily nutritional Info for banner
   }
 }
 </script>

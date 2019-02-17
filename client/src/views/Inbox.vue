@@ -20,7 +20,7 @@
                 <v-list-tile-action>
                   <v-checkbox></v-checkbox>
                 </v-list-tile-action>
-                <v-list-tile-content>FROM</v-list-tile-content>
+                <v-list-tile-content>{{ users[conversation.from].name }}</v-list-tile-content>
                 <v-list-tile-content>{{ conversation.subject }}</v-list-tile-content>
               </v-list-tile>
             </template>
@@ -51,6 +51,9 @@ export default {
     inbox: function() {
       return this.$store.getters.inbox;
     },
+    users: function() {
+      return this.$store.getters.connections;
+    }
   },
 }
 </script>

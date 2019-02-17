@@ -12,16 +12,23 @@
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <v-list two-line>
-            <template v-for="n in 2">
-              <v-divider v-if="n !== 1" :key="`divider-${n}`"></v-divider>
+            <template v-for="(client, index) in clients">
+              <v-divider v-if="index !== 0" :key="`divider-${index}`"></v-divider>
               <v-list-tile
-                :key="`client-${n}`"
+                :key="`client-${client.id}`"
                 router
               >
                 <v-list-tile-avatar>
                   <v-icon x-large>account_circle</v-icon>
                 </v-list-tile-avatar>
-                <!-- TODO: add button to end of tile in order to compose messages to client -->
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ client.name }}</v-list-tile-title>
+                  <v-list-tile-sub-title></v-list-tile-sub-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <!-- TODO: add button to end of tile in order to compose messages to client -->
+                  <v-icon>chat_bubble</v-icon>
+                </v-list-tile-action>
               </v-list-tile>
             </template>
           </v-list>

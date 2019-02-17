@@ -12,7 +12,12 @@ module.exports = {
   },
 
   getMessagesByConversationId: (req, res) => {
-    // TODO: build route
+    knex('messages')
+      .where('conversation_id', req.params.conversation_id)
+      .orderBy('created_at')
+      .then( data => {
+        res.send(data);
+      });
   }
 
 }
