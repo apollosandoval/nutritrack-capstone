@@ -27,7 +27,6 @@ export default {
     getAllAllies: async function(context, user) {
       try {
         context.commit('REQUEST_ALL_CONNECTIONS');
-        // TODO: build route for all allies by user id
         const res = await axios.get(`${URL}/${user.id}/allies`);
         context.commit('RECEIVE_ALL_CONNECTIONS', res.data);
       } catch(err) {

@@ -27,8 +27,7 @@
             <v-spacer></v-spacer>
             <!-- TODO: add @click -->
             <v-btn @click="submit">Sign In</v-btn>
-            <!-- TODO: add rerouting -->
-            <v-btn>Register</v-btn>
+            <v-btn router to="/register">Register</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

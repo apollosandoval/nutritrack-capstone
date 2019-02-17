@@ -1,13 +1,17 @@
 <template>
-  <v-container>
-    <v-layout justify-center>
-      <v-flex xs12>
-        <!-- TODO: ProfileBanner Component -->
-        <profile-banner />
+  <v-container grid-list-xl>
+    <v-layout>
+      <v-flex>
+        <profile-banner></profile-banner>
       </v-flex>
     </v-layout>
-    <!-- TODO: add meal card list -->
-    <meal-card />
+    <v-layout column>
+      <template v-for="(meal, index) of today">
+        <v-flex :key="`meal-${index}`">
+          <meal-card></meal-card>
+        </v-flex>
+      </template>
+    </v-layout>
     <!-- Add Meal button -->
     <v-btn
       fab
@@ -45,9 +49,20 @@ export default {
       dialog: false,
     };
   },
+  mounted() {
+    const date = new Date();
+    this.$store.dispatch('getTodaysMeals', {
+      user: this.$store.getters.auth,
+      // TODO: change hard coded date
+      date: date.toDateString(),
+    });
+  },
   computed: {
     // TODO: compute list of meal cards
-    // TODO: compute dialy nutritional Info for banner
+    today: function() {
+      return this.$store.getters.meals;
+    }
+    // TODO: compute daily nutritional Info for banner
   }
 }
 </script>

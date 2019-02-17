@@ -1,19 +1,45 @@
 import axios from 'axios'
-import router from '@/router/router'
+const URL = require('../api-variables').URL;
 
 export default {
-  state: {},
+  state: {
+    meals: [],
+    isFetching: false,
+  },
 
-  getters: {},
+  getters: {
+    meals: function(state) {
+      return state.meals;
+    }
+  },
 
   actions: {
     // TODO: GET all meals by user id and day
+    getTodaysMeals: async function(context, {user, date}) {
+      try {
+        context.commit('REQUEST_MEALS');
+        const res = await axios.get(`${URL}/${user.id}/meals/${date}`);
+        console.log('response: ', res.data)
+        context.commit('RECEIVE_MEALS_BY_DATE', res.data);
+      } catch(err) {
+        context.commit('REQUEST_MEALS');
+        throw new Error(err);
+      }
+    },
     // TODO: GET all meals by user id and week
     // TODO: GET all meals by month
     // TODO: POST new meal
     // TODO: PATCH an existing meal by date
   },
 
-  mutations: {},
+  mutations: {
+    REQUEST_MEALS: function(state) {
+      state.isFetching = !state.isFetching;
+    },
+    RECEIVE_MEALS_BY_DATE: function(state, payload) {
+      state.isFetching = false;
+      state.meals = payload;
+    }
+  },
 
 }

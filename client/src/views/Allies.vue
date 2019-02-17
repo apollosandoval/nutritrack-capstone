@@ -17,7 +17,7 @@
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title>{{ allie.name }}</v-list-tile-title>
-                <v-list-tile-sub-title>Institution Name</v-list-tile-sub-title>
+                <v-list-tile-sub-title>{{ allie.institution }}</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
                 <!-- Creates pop-over effect of NewMessageForm when clicking btn -->
