@@ -2,6 +2,7 @@
 const auth = require('../controllers/auth')
 const users = require('../controllers/users')
 const messages = require('../controllers/messages');
+const meals = require('../controllers/meals');
 
 module.exports = (app) => {
 
@@ -15,5 +16,10 @@ module.exports = (app) => {
   // routes for messages
   app.get("/:user_id/inbox", messages.getAllConversations);
   app.get("/:user_id/inbox/:conversation_id", messages.getMessagesByConversationId);
+
+  // routes for meals
+  app.get("/:user_id/meals/:date", meals.getMealsByDate);
+  app.get("/:user_id/history/:week", meals.getMealsByWeek);
+  app.get("/:user_id/history/:month", meals.getMealsByMonth);
 
 };
