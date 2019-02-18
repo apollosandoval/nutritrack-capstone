@@ -23,5 +23,6 @@ module.exports = (app) => {
   app.get("/:user_id/meals/:date", meals.getMealsByDate);
   app.get("/:user_id/history/:week", meals.getMealsByWeek);
   app.get("/:user_id/history/:month", meals.getMealsByMonth);
+  app.post("/:user_id/meals/", meals.postMeal);
 
 };

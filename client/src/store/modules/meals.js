@@ -27,6 +27,16 @@ export default {
     // TODO: GET all meals by user id and week
     // TODO: GET all meals by month
     // TODO: POST new meal
+    postMeal: async function(context, {meal, user, date, mealtime}) {
+      try {
+        context.commit('REQUEST_MEALS');
+        const res = await axios.post(`${URL}/${user.id}/meals/`, {meal, date});
+        console.log('response to POST meal:', res.data);
+      } catch(err) {
+        context.commit('REQUEST_MEALS');
+        throw new Error(err);
+      }
+    }
     // TODO: PATCH an existing meal by date
   },
 
