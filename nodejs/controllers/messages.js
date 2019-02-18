@@ -22,7 +22,7 @@ module.exports = {
 
   postConversation: (req, res) => {
     knex('conversations')
-      .returning('id')
+      .returning('*')
       .insert(req.body)
       .then( data => {
         res.send(data);

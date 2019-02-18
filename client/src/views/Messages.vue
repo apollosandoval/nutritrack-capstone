@@ -3,15 +3,16 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8>
         <v-toolbar>
-          <v-list-tile>
+          <v-list-tile class="grow">
             <v-list-tile-action>
-              <v-icon>arrow_back</v-icon>
+              <!-- NOTE: Add routing back to /:username/inbox -->
+              <!-- <v-icon>arrow_back</v-icon> -->
             </v-list-tile-action>
             <v-list-tile-content>{{ conversation.subject }}</v-list-tile-content>
             <v-spacer></v-spacer>
-            <!-- NOTE: delete if can't get right aligned -->
+            <!-- Reply Bubble -->
             <v-list-tile-action>
-              <v-icon>send</v-icon>
+              <reply-bubble :conversation="conversation"/>
             </v-list-tile-action>
           </v-list-tile>
         </v-toolbar>
@@ -29,16 +30,21 @@
 </template>
 
 <script>
+import ReplyBubble from '@/components/ReplyBubble'
+
 export default {
+  components: {
+    'reply-bubble': ReplyBubble,
+  },
   mounted() {
-    this.$store.dispatch('getMessagesById', {
+    this.$store.dispatch('getMessagesByConversationId', {
       user: this.$store.getters.auth,
       conversationId: this.$route.params.conversationId,
     })
   },
   computed: {
     messages: function() {
-      return this.$store.getters.messagesById(this.$route.params.conversationId)
+      return this.$store.getters.messagesByConversationId(this.$route.params.conversationId)
     },
     conversation: function() {
       return this.$store.getters.inbox[this.$route.params.conversationId];
