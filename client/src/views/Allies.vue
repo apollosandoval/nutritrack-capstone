@@ -8,6 +8,7 @@
         </v-card>
       </v-flex>
       <!-- Current Allies -->
+      <v-divider></v-divider>
       <v-flex>
         <v-card>
           <v-list two-line>
@@ -21,42 +22,27 @@
               </v-list-tile-content>
               <v-list-tile-action>
                 <!-- Creates pop-over effect of NewMessageForm when clicking btn -->
-                <v-menu
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  left
-                  min-width="500"
-                >
-                  <v-btn
-                    slot="activator"
-                    flat
-                  >
-                    <v-icon>chat_bubble</v-icon>
-                  </v-btn>
-                  <new-message-form />
-                </v-menu>
+                <new-message-bubble :connection="allie"/>
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
         </v-card>
       </v-flex>
-      <!--Searchable List of Available Allies -->
+      <!-- NOTE: Insert Searchable List of Available Allies -->
       <v-flex></v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import NewMessageForm from '@/components/NewMessageForm'
+import NewMessageBubble from '@/components/NewMessageBubble'
 
 export default {
   components: {
-    'new-message-form': NewMessageForm,
+    'new-message-bubble': NewMessageBubble,
   },
   data() {
-    return {
-      menu: false,
-    };
+    return {};
   },
   mounted() {
     this.$store.dispatch('getAllAllies', this.$store.getters.auth);

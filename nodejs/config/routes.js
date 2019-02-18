@@ -16,6 +16,8 @@ module.exports = (app) => {
   // routes for messages
   app.get("/:user_id/inbox", messages.getAllConversations);
   app.get("/:user_id/inbox/:conversation_id", messages.getMessagesByConversationId);
+  app.post("/conversations", messages.postConversation);
+  app.post("/messages", messages.postMessageByConversationId);
 
   // routes for meals
   app.get("/:user_id/meals/:date", meals.getMealsByDate);

@@ -65,7 +65,7 @@ export default new Router({
     },
     {
       path: "/pro/:username/inbox/:conversationId",
-      name: "Messages",
+      name: "ProMessages",
       component: Messages
     },
     {

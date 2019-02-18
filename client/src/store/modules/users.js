@@ -18,7 +18,17 @@ export default {
       try {
         context.commit('REQUEST_ALL_CONNECTIONS');
         const res = await axios.get(`${URL}/pro/${user.id}/clients`);
-        context.commit('RECEIVE_ALL_CONNECTIONS', res.data);
+        const payload = res.data.reduce((acc, client) => {
+          acc.push({
+            name: client.name,
+            email: client.email,
+            institution: client.institution,
+            pro: client.pro,
+            id: client.client,
+          })
+          return acc;
+        }, []);
+        context.commit('RECEIVE_ALL_CONNECTIONS', payload);
       } catch(err) {
         context.commit('REQUEST_ALL_CONNECTIONS');
         throw new Error(err);
@@ -28,7 +38,17 @@ export default {
       try {
         context.commit('REQUEST_ALL_CONNECTIONS');
         const res = await axios.get(`${URL}/${user.id}/allies`);
-        context.commit('RECEIVE_ALL_CONNECTIONS', res.data);
+        const payload = res.data.reduce((acc, allie) => {
+          acc.push({
+            name: allie.name,
+            email: allie.email,
+            institution: allie.institution,
+            pro: allie.pro,
+            id: allie.professional,
+          })
+          return acc;
+        }, []);
+        context.commit('RECEIVE_ALL_CONNECTIONS', payload);
       } catch(err) {
         context.commit('REQUEST_ALL_CONNECTIONS');
         throw new Error(err);

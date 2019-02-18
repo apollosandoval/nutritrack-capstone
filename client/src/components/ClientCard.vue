@@ -14,7 +14,7 @@
 
           <v-list-tile-content>
             <!-- TODO: Fill in client details -->
-            <v-list-tile-text>{{ client.name }}</v-list-tile-text>
+            <v-list-tile-title>{{ client.name }}</v-list-tile-title>
           </v-list-tile-content>
 
           <v-layout></v-layout>

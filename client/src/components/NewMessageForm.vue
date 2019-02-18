@@ -8,15 +8,18 @@
     <v-card-text>
       <v-form>
         <v-text-field
-          label="To"
+          :value="connection.name"
           single-line
+          readonly
         ></v-text-field>
         <v-text-field
+          v-model="subject"
           label="Subject"
           single-line
         ></v-text-field>
         <v-divider></v-divider>
         <v-textarea
+          v-model="content"
           single-line
           full-width
         ></v-textarea>
@@ -24,8 +27,8 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <!-- TODO: make button submits -->
-      <v-btn flat>Send</v-btn>
+      <!-- TODO: make button submit -->
+      <v-btn flat @click="submit">Send</v-btn>
       <v-spacer></v-spacer>
       <v-btn flat>
         <!-- TODO: make button clear message and close window -->
@@ -37,14 +40,23 @@
 
 <script>
 export default {
+  props: ['connection'],
   // TODO: Bind data in new message form
   data() {
-    return {};
+    return {
+      subject: '',
+      content: '',
+    };
   },
-  method: {
+  methods: {
     submit: function() {
-      // TODO: Build Submit NewMessageForm
+      this.$store.dispatch('postConversation', {
+        subject: this.subject,
+        content: this.content,
+        from: this.$store.getters.auth.id,
+        to: this.connection.id,
+      });
     },
-  }
+  },
 }
 </script>

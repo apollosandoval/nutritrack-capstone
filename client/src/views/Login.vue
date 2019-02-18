@@ -26,7 +26,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <!-- TODO: add @click -->
-            <v-btn @click="submit">Sign In</v-btn>
+            <v-btn @click.prevent="submit">Sign In</v-btn>
             <v-btn router to="/register">Register</v-btn>
           </v-card-actions>
         </v-card>

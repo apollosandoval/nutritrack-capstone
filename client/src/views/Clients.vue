@@ -13,7 +13,7 @@
         <v-card>
           <v-list two-line>
             <template v-for="(client, index) in clients">
-              <v-divider v-if="index !== 0" :key="`divider-${index}`"></v-divider>
+              <v-divider v-if="index > 0" :key="`divider-${index}`"></v-divider>
               <v-list-tile
                 :key="`client-${client.id}`"
                 router
@@ -25,9 +25,9 @@
                   <v-list-tile-title>{{ client.name }}</v-list-tile-title>
                   <v-list-tile-sub-title></v-list-tile-sub-title>
                 </v-list-tile-content>
+                <!-- Creates pop-over effect of NewMessageForm when clicking btn -->
                 <v-list-tile-action>
-                  <!-- TODO: add button to end of tile in order to compose messages to client -->
-                  <v-icon>chat_bubble</v-icon>
+                  <new-message-bubble :connection="client"/>
                 </v-list-tile-action>
               </v-list-tile>
             </template>
@@ -39,10 +39,15 @@
 </template>
 
 <script>
+import NewMessageBubble from '@/components/NewMessageBubble'
+
 export default {
+  components: {
+    'new-message-bubble': NewMessageBubble,
+  },
   data() {
     return {
-      searchTerm: ''
+      searchTerm: '',
     }
   },
   mounted() {

@@ -20,7 +20,9 @@
                 <v-list-tile-action>
                   <v-checkbox></v-checkbox>
                 </v-list-tile-action>
-                <v-list-tile-content>{{ users[conversation.from].name }}</v-list-tile-content>
+                <v-list-tile-content>
+                  {{ users[conversation.from].name }}
+                </v-list-tile-content>
                 <v-list-tile-content>{{ conversation.subject }}</v-list-tile-content>
               </v-list-tile>
             </template>
@@ -49,7 +51,16 @@ export default {
       return '';
     },
     inbox: function() {
-      return this.$store.getters.inbox;
+      // need to filter down to only those messages sent to
+      const filtered = {};
+      const inbox = this.$store.getters.inbox;
+      const me = this.$store.getters.auth.id;
+      for (let key in inbox) {
+        if (inbox[key].from !== me) {
+          filtered[key] = inbox[key];
+        }
+      }
+      return filtered;
     },
     users: function() {
       return this.$store.getters.connections;

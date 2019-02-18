@@ -38,8 +38,27 @@ export default {
         throw new Error(err);
       }
     },
-    postMessage: function() {
+    postConversation: async function(context, message) {
       // TODO: compose new message
+      try {
+        // register a new conversation and retrieve conversation_id
+        const conversation = await axios.post(`${URL}/conversations`, {
+          subject: message.subject,
+          from: message.from,
+          to: message.to,
+        });
+        // post new message with generated conversation_id
+        const res = await axios.post(`${URL}/messages`, {
+          conversation_id: conversation.data[0],
+          from: message.from,
+          to: message.to,
+          content: message.content,
+        })
+        console.log('conversation response:', conversation.data);
+        console.log('mesages response:', res.data);
+      } catch(err) {
+        throw new Error(err);
+      }
     }
   },
 

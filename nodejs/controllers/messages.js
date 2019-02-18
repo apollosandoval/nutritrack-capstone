@@ -18,6 +18,24 @@ module.exports = {
       .then( data => {
         res.send(data);
       });
-  }
+  },
+
+  postConversation: (req, res) => {
+    knex('conversations')
+      .returning('id')
+      .insert(req.body)
+      .then( data => {
+        res.send(data);
+      })
+  },
+
+  postMessageByConversationId: (req, res) => {
+    knex('messages')
+      .insert(req.body)
+      .returning('*')
+      .then( data => {
+        res.send(data);
+      })
+  },
 
 }
