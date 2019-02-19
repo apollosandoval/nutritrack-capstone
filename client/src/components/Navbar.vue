@@ -1,7 +1,7 @@
 <template>
   <div>
+    <!-- Top Navigation Drawer -->
     <v-toolbar dark app>
-      <!-- TODO: Insert side icon for side drawer -->
       <v-toolbar-side-icon v-if="authenticated" @click="drawer = true"></v-toolbar-side-icon>
       <v-toolbar-title>Nutritrack</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -15,7 +15,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <!-- Sidebar for navigation -->
+    <!-- Sidebar Navigation Drawer -->
     <v-navigation-drawer
       app
       v-model="drawer"

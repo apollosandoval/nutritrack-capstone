@@ -26,12 +26,11 @@
       </v-form>
     </v-card-text>
     <v-divider></v-divider>
+    <!-- POST newly created message or 'CLEAR' and close menu -->
     <v-card-actions>
-      <!-- TODO: make button submit -->
       <v-btn flat @click="submit">Send</v-btn>
       <v-spacer></v-spacer>
-      <v-btn flat>
-        <!-- TODO: make button clear message and close window -->
+      <v-btn flat @click="clearForm">
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-actions>
@@ -41,7 +40,6 @@
 <script>
 export default {
   props: ['connection'],
-  // TODO: Bind data in new message form
   data() {
     return {
       subject: '',
@@ -56,7 +54,13 @@ export default {
         from: this.$store.getters.auth.id,
         to: this.connection.id,
       });
+      this.$emit('closeDialogEvent');
     },
+    clearForm: function() {
+      this.subject = '';
+      this.content = '';
+      this.$emit('closeDialogEvent');
+    }
   },
 }
 </script>

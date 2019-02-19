@@ -86,5 +86,4 @@ export default new Router({
   ]
 })
 
-// TODO: figure out if I need to nest routes
-// TODO: remove 'pro' from url labels
+// NOTE: remove 'pro' from url labels

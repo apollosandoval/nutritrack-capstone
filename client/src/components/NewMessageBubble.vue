@@ -11,7 +11,10 @@
     >
       <v-icon>chat_bubble</v-icon>
     </v-btn>
-    <new-message-form :connection="connection"/>
+    <new-message-form
+      @closeDialogEvent="menu = false"
+      :connection="connection"
+    />
   </v-menu>
 </template>
 
@@ -27,6 +30,7 @@ export default {
     return {
       menu: false,
     }
-  }
+  },
+  methods: {},
 }
 </script>

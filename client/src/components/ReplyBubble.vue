@@ -9,7 +9,10 @@
       slot="activator"
       flat
     >Reply</v-btn>
-    <reply-message-form :conversation="conversation"/>
+    <reply-message-form
+      @closeDialogEvent="menu = false"
+      :conversation="conversation"
+    />
   </v-menu>
 </template>
 
@@ -24,7 +27,8 @@ export default {
   data() {
     return {
       menu: false,
-    }
-  }
+    };
+  },
+  methods: {},
 }
 </script>

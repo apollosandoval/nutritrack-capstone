@@ -18,12 +18,11 @@
       </v-form>
     </v-card-text>
     <v-divider></v-divider>
+    <!-- POST new reply or 'CLEAR' and close menu -->
     <v-card-actions>
-      <!-- TODO: make 'Reply' btn submit -->
       <v-btn flat @click="submit">Reply</v-btn>
       <v-spacer></v-spacer>
-      <v-btn flat>
-        <!-- TODO: make button clear message and close window -->
+      <v-btn flat @click="clearForm">
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-actions>
@@ -46,6 +45,11 @@ export default {
         to: this.conversation.to,
         content: this.content,
       });
+      this.$emit('closeDialogEvent');
+    },
+    clearForm: function() {
+      this.content = '';
+      this.$emit('closeDialogEvent')
     },
   },
 }

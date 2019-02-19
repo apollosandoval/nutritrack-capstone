@@ -31,7 +31,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn>Submit</v-btn>
-            <v-btn>Cancel</v-btn>
+            <v-btn @click="clearForm">Cancel</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -61,7 +61,11 @@ export default {
     submit: function() {
       // TODO: fill in register submit
     },
-    // TODO: figure out how to clear form on cancel
-  }
+    clearForm: function() {
+      this.name = '';
+      this.email = '';
+      this.password = '';
+    },
+  },
 }
 </script>

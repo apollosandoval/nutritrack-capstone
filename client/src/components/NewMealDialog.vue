@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     submit: function() {
-      // TODO: handle submit of Eating Out Tab
       const date = new Date();
       this.$store.dispatch('postEatOut', {
         meal: {
