@@ -2,7 +2,7 @@
   <div>
     <v-toolbar dark app>
       <!-- TODO: Insert side icon for side drawer -->
-      <v-toolbar-side-icon v-if="authenticated" @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="authenticated" @click="drawer = true"></v-toolbar-side-icon>
       <v-toolbar-title>Nutritrack</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- TODO: make toolbar nav display auth based -->
@@ -43,7 +43,7 @@
           :key="`nav-${link.name}`"
           router
           :to="`/pro/${username}/${link.route}`"
-          @click="drawer=!drawer"
+          @click="drawer = false"
         >
           <v-list-tile-action>
             <v-icon>{{ link.icon }}</v-icon>
@@ -58,7 +58,7 @@
           :key="`nav-${link.name}`"
           router
           :to="`/${username}/${link.route}`"
-          @click="drawer=!drawer"
+          @click="drawer = false"
         >
           <v-list-tile-action>
             <v-icon>{{ link.icon }}</v-icon>
