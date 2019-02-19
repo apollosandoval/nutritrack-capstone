@@ -30,8 +30,8 @@ export default {
     postMeal: async function(context, {meal, user, date, mealtime}) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.post(`${URL}/${user.id}/meals/`, {meal, date});
-        console.log('response to POST meal:', res.data);
+        const res = await axios.post(`${URL}/${user.id}/meals/`, {meal, date, mealtime});
+        context.commit('RECEIVE_MEALS_BY_DATE', res.data);
       } catch(err) {
         context.commit('REQUEST_MEALS');
         throw new Error(err);
@@ -46,8 +46,8 @@ export default {
     },
     RECEIVE_MEALS_BY_DATE: function(state, payload) {
       state.isFetching = false;
-      state.meals = payload;
-    }
+      state.meals = [...state.meals, ...payload];
+    },
   },
 
 }
