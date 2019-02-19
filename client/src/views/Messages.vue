@@ -2,7 +2,7 @@
   <v-container>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8>
-        <v-toolbar>
+        <v-toolbar color="primary" dark>
           <v-list-tile class="grow">
             <v-list-tile-action>
               <!-- NOTE: Add routing back to /:username/inbox -->

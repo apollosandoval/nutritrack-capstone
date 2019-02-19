@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Top Navigation Drawer -->
-    <v-toolbar dark app>
+    <v-toolbar dark app color="primary">
       <v-toolbar-side-icon v-if="authenticated" @click="drawer = true"></v-toolbar-side-icon>
       <v-toolbar-title>Nutritrack</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -11,7 +11,7 @@
         <v-btn flat router to="/register">Register</v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-else>
-        <v-btn @click="logout">Sign Out</v-btn>
+        <v-btn flat @click="logout">Sign Out</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 

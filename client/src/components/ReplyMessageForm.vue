@@ -1,8 +1,8 @@
 <template>
   <v-card>
     <!-- NOTE: Toolbar (remove?) -->
-    <v-toolbar dark card>
-      <v-toolbar-title>Reply</v-toolbar-title>
+    <v-toolbar dark card color="primary">
+      <v-toolbar-title >Reply</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
       <v-form>

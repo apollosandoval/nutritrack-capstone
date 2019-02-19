@@ -3,7 +3,7 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card>
-          <v-toolbar>
+          <v-toolbar color="primary" dark>
             <v-toolbar-title>Sign In</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
