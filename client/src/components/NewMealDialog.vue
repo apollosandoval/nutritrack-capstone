@@ -13,18 +13,23 @@
           <v-card-text>
             <v-form>
               <v-select
-                :items="items"
+                v-model="mealtime"
+                :items="times"
                 outline
                 prepend-inner-icon="kitchen"
                 label="Select A Meal"
               ></v-select>
               <v-text-field
+                v-model="item1"
                 prepend-inner-icon="search"
                 label="Item 1"
                 placeholder="Find your item"
               ></v-text-field>
             </v-form>
           </v-card-text>
+          <v-card-actions>
+            <v-btn @click="submit">Submit</v-btn>
+          </v-card-actions>
         </v-card>
       </v-tab-item>
       <!-- Dining in tab items -->
@@ -44,12 +49,23 @@ export default {
   },
   data() {
     return {
-      items: ["Snack", "Breakfast", "Lunch", "Dinner"],
+      times: ["Snack", "Breakfast", "Lunch", "Dinner"],
+      mealtime: null,
+      item1: '',
     }
   },
   methods: {
     submit: function() {
       // TODO: handle submit of Eating Out Tab
+      const date = new Date();
+      this.$store.dispatch('postEatOut', {
+        meal: {
+          item1: this.item1,
+        },
+        mealtime: this.mealtime,
+        user: this.$store.getters.auth,
+        date: date.toDateString(),
+      })
     },
   },
   computed: {},

@@ -25,7 +25,6 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <!-- TODO: add @click -->
             <v-btn @click.prevent="submit">Sign In</v-btn>
             <v-btn router to="/register">Register</v-btn>
           </v-card-actions>
@@ -54,7 +53,6 @@ export default {
   },
   methods: {
     submit: function() {
-      // TODO: fill in Login submit
       if (this.$refs.form.validate()) {
         this.$store.dispatch("login", {
           email: this.email,

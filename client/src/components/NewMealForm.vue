@@ -49,7 +49,7 @@ export default {
   methods: {
     submit: function() {
       const date = new Date();
-      this.$store.dispatch('postMeal', {
+      this.$store.dispatch('postDineIn', {
         meal: {
           item1: this.item1,
           item2: this.item2,

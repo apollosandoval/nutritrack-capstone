@@ -19,7 +19,7 @@ module.exports = {
 
   },
 
-  postMeal: (req, res) => {
+  postDineIn: (req, res) => {
     // use functional composition to systematically create the async axios calls
     const queryBuilder = (key) => {
       return function() {
@@ -47,7 +47,6 @@ module.exports = {
           protein: [nutrientsItem1.PROCNT, nutrientsItem2.PROCNT, nutrientsItem3.PROCNT].reduce((a,b) => a + (b || 0), 0),
           carbs: [nutrientsItem1.CHOCDF, nutrientsItem2.CHOCDF, nutrientsItem3.CHOCDF].reduce((a,b) => a + (b || 0), 0),
         };
-        // NOTE: DELETE res.send([resItem1.data, resItem2.data, resItem3.data]);
       })
       .then( sum => {
         // use sum to insert new meal values into database
@@ -67,6 +66,34 @@ module.exports = {
       .catch(err => {
         res.send(err);
       })
+  },
+
+  postEatOut: (req, res) => {
+    axios.get(`${process.env.EDAMAM_PARSER}`, {
+      params: {
+        ingr: req.body.meal['item1'],
+        app_id: process.env.APP_ID,
+        app_key: process.env.APP_KEY,
+      }
+    })
+    .then( resItem => {
+      const nutrients = resItem.data.parsed[0].food.nutrients;
+      return knex('meals').returning('*').insert({
+        meal: req.body.mealtime,
+        calories: Math.floor(nutrients.ENERC_KCAL) || 0,
+        fat: Math.floor(nutrients.FAT) || 0,
+        protein: Math.floor(nutrients.PROCNT) || 0,
+        carbs: Math.floor(nutrients.CHOCDF) || 0,
+        date: req.body.date,
+        user: req.params.user_id,
+      })
+    })
+    .then( result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.send(err);
+    })
   },
 
 }

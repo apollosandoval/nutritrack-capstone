@@ -26,11 +26,21 @@ export default {
     },
     // TODO: GET all meals by user id and week
     // TODO: GET all meals by month
-    // TODO: POST new meal
-    postMeal: async function(context, {meal, user, date, mealtime}) {
+    postDineIn: async function(context, {meal, user, date, mealtime}) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.post(`${URL}/${user.id}/meals/`, {meal, date, mealtime});
+        const res = await axios.post(`${URL}/${user.id}/meals/in`, {meal, date, mealtime});
+        console.log('RES.DATA:', res.data);
+        context.commit('RECEIVE_MEALS_BY_DATE', res.data);
+      } catch(err) {
+        context.commit('REQUEST_MEALS');
+        throw new Error(err);
+      }
+    },
+    postEatOut: async function(context, {meal, user, date, mealtime}) {
+      try {
+        context.commit('REQUEST_MEALS');
+        const res = await axios.post(`${URL}/${user.id}/meals/out`, {meal, date, mealtime});
         context.commit('RECEIVE_MEALS_BY_DATE', res.data);
       } catch(err) {
         context.commit('REQUEST_MEALS');
@@ -46,6 +56,7 @@ export default {
     },
     RECEIVE_MEALS_BY_DATE: function(state, payload) {
       state.isFetching = false;
+      console.log('MEALS PAYLOAD:', payload);
       state.meals = [...state.meals, ...payload];
     },
   },
