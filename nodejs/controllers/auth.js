@@ -9,9 +9,18 @@ module.exports = {
       })
   },
 
-  getAuthPro: (req, res) => {
-    let pro = {};
-    res.send(pro);
-  },
+  postNewUser: async (req, res) => {
+    console.log('REQUEST BODY: ', req.body);
+    try {
+      const user = await knex('users').insert(req.body).returning('id');
+      const result = await knex('allies').insert({
+        professional: 4,
+        client: user[0],
+      });
+      res.send(result);
+    } catch(err) {
+      res.send(err);
+    }
+  }
 
 };

@@ -6,6 +6,8 @@ export default {
   state: {
     user: [],
     authenticated: false,
+    // TODO: make sure token exists;
+    token: localStorage.getItem('token')
   },
   
   getters: {
@@ -14,11 +16,24 @@ export default {
     },
     authenticated: function(state) {
       return state.authenticated;
+    },
+    token: function(state) {
+      // NOTE: this method is currently not being used anywhere
+      return state.token;
     }
   },
 
   actions: {
-    register: function() {},
+    register: async function(context, user) {
+      try {
+        const res = await axios.post(`${URL}/register`, user);
+        if (res.status === 200) {
+          router.push({path: '/login'});
+        }
+      } catch(err) {
+        throw new Error(err);
+      }
+    },
     login: async function(context, user) {
       const { email } = user;
       try {

@@ -30,7 +30,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn>Submit</v-btn>
+            <v-btn @click="submit">Submit</v-btn>
             <v-btn @click="clearForm">Cancel</v-btn>
           </v-card-actions>
         </v-card>
@@ -59,7 +59,12 @@ export default {
   },
   methods: {
     submit: function() {
-      // TODO: fill in register submit
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("register", {
+          name: this.name,
+          email: this.email,
+        });
+      }
     },
     clearForm: function() {
       this.name = '';
