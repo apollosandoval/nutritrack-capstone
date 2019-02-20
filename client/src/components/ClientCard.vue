@@ -21,9 +21,11 @@
       <!-- Display Graph -->
       <v-sheet>
         <v-sparkline
-          :value="value"
+          :value="weeklyStats"
           :smooth="16"
           :line-width="3"
+          :fill="true"
+          :gradient="gradient"
           auto-draw
         ></v-sparkline>
       </v-sheet>
@@ -36,11 +38,22 @@ export default {
   props: ['client'],
   data() {
     return {
-      value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      gradient: ['#E53935','#FDD835','#8BC34A','#4CAF50'],
     }
   },
-  compuated: {
+  mounted() {
+    this.$store.dispatch('getWeeklyMeals', {user: this.client});
+  },
+  computed: {
     // TODO: Need to compute daily calories for a week
+    weeklyStats: function() {
+      const meals = this.$store.getters.mealsByUserId(this.client.id);
+      if (meals) {
+        return meals.map(meal => meal.calories);
+      } else {
+        return [];
+      }
+    }
   },
 }
 </script>

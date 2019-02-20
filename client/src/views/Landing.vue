@@ -6,8 +6,8 @@
       >
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
-            <v-flex xs12 sm8 class="text-xs-center">
-              <span class="display-4 white--text font-weight-light font-italic">NutriTrack</span>
+            <v-flex xs12 sm10 class="text-xs-center">
+              <span class="display-4 white--text font-weight-light font-italic">Nutritonal Tracking</span>
             </v-flex>
           </v-layout>
         </v-container>

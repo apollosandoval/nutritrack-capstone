@@ -34,7 +34,7 @@
       </v-tab-item>
       <!-- Dining in tab items -->
       <v-tab-item>
-        <new-meal-form />
+        <new-meal-form @closeDialogEvent="bubbleClose" />
       </v-tab-item>
     </v-tabs>
   </v-card>
@@ -57,6 +57,7 @@ export default {
   methods: {
     submit: function() {
       const date = new Date();
+      this.$emit('closeDialogEvent');
       this.$store.dispatch('postEatOut', {
         meal: {
           item1: this.item1,
@@ -64,8 +65,16 @@ export default {
         mealtime: this.mealtime,
         user: this.$store.getters.auth,
         date: date.toDateString(),
-      })
+      });
+      this.clearForm();
     },
+    bubbleClose: function() {
+      this.$emit('closeDialogEvent');
+    },
+    clearForm: function() {
+      this.mealtime = null;
+      this.item1 = '';
+    }
   },
   computed: {},
 }

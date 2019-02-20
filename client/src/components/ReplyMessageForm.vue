@@ -49,7 +49,7 @@ export default {
     },
     clearForm: function() {
       this.content = '';
-      this.$emit('closeDialogEvent')
+      this.$emit('closeDialogEvent');
     },
   },
 }

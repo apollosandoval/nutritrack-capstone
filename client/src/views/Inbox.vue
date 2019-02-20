@@ -51,7 +51,6 @@ export default {
       return '';
     },
     inbox: function() {
-      // need to filter down to only those messages sent to
       const filtered = {};
       const inbox = this.$store.getters.inbox;
       const me = this.$store.getters.auth.id;

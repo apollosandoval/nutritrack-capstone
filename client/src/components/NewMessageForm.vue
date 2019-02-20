@@ -55,6 +55,7 @@ export default {
         to: this.connection.id,
       });
       this.$emit('closeDialogEvent');
+      this.clearForm();
     },
     clearForm: function() {
       this.subject = '';

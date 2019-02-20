@@ -28,7 +28,7 @@
       v-model="dialog"
       max-width="500"
     >
-      <new-meal-dialog />
+      <new-meal-dialog @closeDialogEvent="dialog=false"/>
     </v-dialog>
   </v-container>
 </template>
@@ -60,8 +60,9 @@ export default {
   },
   computed: {
     today: function() {
-      return this.$store.getters.meals;
+      const { id } = this.$store.getters.auth;
+      return this.$store.getters.mealsByUserId(id);
     }
-  }
+  },
 }
 </script>

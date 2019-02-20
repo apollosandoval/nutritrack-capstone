@@ -49,6 +49,7 @@ export default {
   methods: {
     submit: function() {
       const date = new Date();
+      this.$emit('closeDialogEvent');
       this.$store.dispatch('postDineIn', {
         meal: {
           item1: this.item1,
@@ -59,6 +60,13 @@ export default {
         user: this.$store.getters.auth,
         date: date.toDateString(),
       });
+      this.clearForm();
+    },
+    clearForm: function() {
+      this.mealtime= null;
+      this.item1= '';
+      this.item2= '';
+      this.item3= '';
     },
   },
 }

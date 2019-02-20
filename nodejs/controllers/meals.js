@@ -6,13 +6,16 @@ module.exports = {
   getMealsByDate: (req, res) => {
     knex('meals')
       .where('date', req.params.date)
-      .then( data => {
-        res.send(data);
-      })
+      .then( data => res.send(data))
+      .catch( err => res.send(err));
   },
-
+  // TODO: update so returns only values from this week
   getMealsByWeek: (req, res) => {
-
+    knex('meals')
+      .where('user', req.params.user_id)
+      .orderBy('date')
+      .then( data => res.send(data))
+      .catch( err => res.send(err));
   },
 
   getMealsByMonth: (req, res) => {
@@ -60,12 +63,8 @@ module.exports = {
           user: req.params.user_id,
         })
       })
-      .then( result => {
-        res.send(result);
-      })
-      .catch(err => {
-        res.send(err);
-      })
+      .then( result => res.send(result))
+      .catch(err => res.send(err));
   },
 
   postEatOut: (req, res) => {
@@ -88,12 +87,17 @@ module.exports = {
         user: req.params.user_id,
       })
     })
-    .then( result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.send(err);
-    })
+    .then( result => res.send(result))
+    .catch(err => res.send(err));
+  },
+
+  deleteMeal: (req, res) => {
+    knex('meals')
+      .where('id', req.params.meal_id)
+      .del()
+      .returning('id')
+      .then(result => res.send(result))
+      .catch(err => res.send(err));
   },
 
 }
