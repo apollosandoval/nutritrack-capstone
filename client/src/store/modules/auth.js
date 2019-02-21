@@ -7,7 +7,7 @@ const URL = require('../api-variables').URL;
 export default {
   state: {
     user: localStorage.getItem('token') ? jwt.decode(localStorage.getItem('token').substring(7)) : [],
-    authenticated: false,
+    authenticated: localStorage.getItem('token') ? jwt.decode(localStorage.getItem('token').substring(7)) : false,
   },
   
   getters: {
@@ -40,11 +40,11 @@ export default {
           password,
         });
         localStorage.setItem('token', res.data.token);
-        const user = jwt.decode(res.data.token);
+        const user = jwt.decode(localStorage.getItem('token').substring(7));
         user.username = user.name.split(" ").join(".").toLowerCase();
         context.commit('LOGIN', {user: user});
         // TODO: place token in local storage as well
-        if (res.data.pro) {
+        if (user.pro) {
           router.push({path: `/pro/${user.username}`});
         } else {
           router.push({path: `/${user.username}`});
@@ -54,8 +54,8 @@ export default {
       }
     },
     logout: function(context) {
+      localStorage.removeItem('token');
       context.commit("LOGOUT");
-      localStorage.setItem('token', null)
       router.push({path: "/login"});
     },
   },

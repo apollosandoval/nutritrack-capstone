@@ -20,6 +20,7 @@
       app
       v-model="drawer"
       dark
+      disable-resize-watcher
     >
       <v-layout column align-center>
         <v-flex class="mt-5">
