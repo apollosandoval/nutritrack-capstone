@@ -1,10 +1,11 @@
 import axios from 'axios'
 import router from '@/router/router'
 const URL = require('../api-variables').URL;
+const jwt_decode = require('jwt-decode');
 
 export default {
   state: {
-    user: [],
+    user: localStorage.getItem('token') ? jwt_decode(localStorage.getItem('token')) : [],
     authenticated: false,
     // TODO: make sure token exists;
     token: localStorage.getItem('token')
@@ -35,15 +36,23 @@ export default {
       }
     },
     login: async function(context, user) {
-      const { email } = user;
+      const { email, password } = user;
       try {
-        const res = await axios.get(`${URL}/login/${email}`);
-        res.data.username = res.data.name.split(" ").join(".").toLowerCase();
-        context.commit('LOGIN', {user: res.data});
+        // NOTE: include token 'if' statement, and make sure that it doesn't already
+        // exist in local storage
+        const res = await axios.post(`${URL}/login`, {
+          email,
+          password,
+        });
+        localStorage.setItem('token', res.data.token);
+        const user = jwt_decode(res.data.token);
+        user.username = user.name.split(" ").join(".").toLowerCase();
+        context.commit('LOGIN', {user: user});
+        // TODO: place token in local storage as well
         if (res.data.pro) {
-          router.push({path: `/pro/${res.data.username}`});
+          router.push({path: `/pro/${user.username}`});
         } else {
-          router.push({path: `/${res.data.username}`});
+          router.push({path: `/${user.username}`});
         }
       } catch(err) {
         throw new Error(err);

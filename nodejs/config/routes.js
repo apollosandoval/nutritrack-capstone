@@ -4,15 +4,15 @@ const users = require('../controllers/users')
 const messages = require('../controllers/messages');
 const meals = require('../controllers/meals');
 
-module.exports = (app) => {
+module.exports = (app, passport) => {
 
   // routes for auth
-  app.get("/login/:email", auth.getAuthUser);
+  app.post("/login", auth.postAuthUser);
   app.post("/register", auth.postNewUser);
   
   // routes for users
   app.get("/pro/:user_id/clients", users.getAllClients);
-  app.get("/:user_id/allies", users.getAllAllies);
+  app.get("/:user_id/allies", passport.authenticate('jwt', {session: false}), users.getAllAllies);
 
   // routes for messages
   app.get("/:user_id/inbox", messages.getAllConversations);

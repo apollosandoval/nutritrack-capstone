@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('name');
     table.string('email');
+    table.string('password');
     table.string('institution').defaultTo(null);
     table.boolean('pro').defaultTo(false);
     table.timestamps(true, true);
