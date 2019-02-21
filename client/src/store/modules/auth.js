@@ -1,14 +1,13 @@
 import axios from 'axios'
 import router from '@/router/router'
+import jwt from 'jsonwebtoken'
 const URL = require('../api-variables').URL;
-const jwt_decode = require('jwt-decode');
+
 
 export default {
   state: {
-    user: localStorage.getItem('token') ? jwt_decode(localStorage.getItem('token')) : [],
+    user: localStorage.getItem('token') ? jwt.decode(localStorage.getItem('token').substring(7)) : [],
     authenticated: false,
-    // TODO: make sure token exists;
-    token: localStorage.getItem('token')
   },
   
   getters: {
@@ -18,10 +17,6 @@ export default {
     authenticated: function(state) {
       return state.authenticated;
     },
-    token: function(state) {
-      // NOTE: this method is currently not being used anywhere
-      return state.token;
-    }
   },
 
   actions: {
@@ -45,7 +40,7 @@ export default {
           password,
         });
         localStorage.setItem('token', res.data.token);
-        const user = jwt_decode(res.data.token);
+        const user = jwt.decode(res.data.token);
         user.username = user.name.split(" ").join(".").toLowerCase();
         context.commit('LOGIN', {user: user});
         // TODO: place token in local storage as well
@@ -60,6 +55,7 @@ export default {
     },
     logout: function(context) {
       context.commit("LOGOUT");
+      localStorage.setItem('token', null)
       router.push({path: "/login"});
     },
   },

@@ -34,7 +34,6 @@ module.exports = (passport) => {
   }))
 
   passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    console.log('jwt_payload:', jwt_payload)
     knex('users').where('email', jwt_payload.email)
       .then(user => {
         if (user) return done(null, user);

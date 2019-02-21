@@ -1,5 +1,8 @@
 import axios from 'axios'
 const URL = require('../api-variables').URL;
+const headers = {
+  'Authorization': localStorage.getItem('token'),
+}
 
 export default {
   state: {
@@ -17,7 +20,7 @@ export default {
     getTodaysMeals: async function(context, {user, date}) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.get(`${URL}/${user.id}/meals/${date}`);
+        const res = await axios.get(`${URL}/${user.id}/meals/${date}`, {headers});
         context.commit('RECEIVE_MEALS_BY_DATE', {meals: res.data, user: user});
       } catch(err) {
         context.commit('REQUEST_MEALS');
@@ -28,7 +31,7 @@ export default {
     getWeeklyMeals: async function(context, {user}) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.get(`${URL}/${user.id}/history/week`);
+        const res = await axios.get(`${URL}/${user.id}/history/week`, {headers});
         context.commit('RECEIVE_MEALS_BY_DATE', {meals: res.data, user: user});
       } catch(err) {
         context.commit('REQUEST_MEALS');
@@ -38,7 +41,7 @@ export default {
     postDineIn: async function(context, {meal, user, date, mealtime}) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.post(`${URL}/${user.id}/meals/in`, {meal, date, mealtime});
+        const res = await axios.post(`${URL}/${user.id}/meals/in`, {meal, date, mealtime}, {headers});
         context.commit('RECEIVE_MEALS_BY_DATE', {meals:res.data, user: user});
       } catch(err) {
         context.commit('REQUEST_MEALS');
@@ -48,7 +51,7 @@ export default {
     postEatOut: async function(context, {meal, user, date, mealtime}) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.post(`${URL}/${user.id}/meals/out`, {meal, date, mealtime});
+        const res = await axios.post(`${URL}/${user.id}/meals/out`, {meal, date, mealtime}, {headers});
         context.commit('RECEIVE_MEALS_BY_DATE', {meals: res.data, user: user});
       } catch(err) {
         context.commit('REQUEST_MEALS');
@@ -58,7 +61,7 @@ export default {
     deleteCard: async function(context, meal_id) {
       try {
         context.commit('REQUEST_MEALS');
-        const res = await axios.delete(`${URL}/meals/${meal_id}`);
+        const res = await axios.delete(`${URL}/meals/${meal_id}`, {headers});
         context.commit('DELETE_CARD', {id: res.data[0]});
       } catch(err) {
         context.commit('REQUEST_MEALS');

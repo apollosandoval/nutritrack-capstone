@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import jwt_decode from 'jwt-decode'
+import jwt from 'jsonwebtoken'
 
 import Landing from '@/views/Landing'
 import Login from '@/views/Login'
@@ -12,6 +12,7 @@ import Allies from '@/views/Allies'
 import Inbox from '@/views/Inbox'
 import Messages from '@/views/Messages'
 import Settings from '@/views/Settings'
+import NotFound from '@/views/NotFound'
 
 Vue.use(Router)
 
@@ -115,19 +116,27 @@ const router = new Router({
         requiresAuth: true,
       }
     },
+    {
+      path: "*",
+      name: "NotFound",
+      component: NotFound,
+    }
   ]
 })
 
 // NOTE: remove 'pro' from url labels
-// TODO: setup authentication 
-router.beforeEach((to, from, next) => {
+router.beforeEach(function (to, from, next) {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const currentUser = jwt_decode(localStorage.getItem('token'));
-  const username = currentUser.name.split(" ").join(".").toLowerCase();
+  const currentUser = localStorage.getItem('token');
 
-  if (requiresAuth && !currentUser) next('/login');
-  else if (!requiresAuth && currentUser) next(`/${username}`);
-  else next();
+  if (requiresAuth && !currentUser) {
+    next('/login');
+  } else if (!requiresAuth && currentUser) {
+    const username = jwt.decode(currentUser.substring(7)).name.split(" ").join(".").toLowerCase();
+    next(`/${username}`)
+  } else {
+    next();
+  }
 });
 
 export default router;
