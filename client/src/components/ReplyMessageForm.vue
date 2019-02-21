@@ -42,7 +42,7 @@ export default {
       this.$store.dispatch('postMessageToConversation', {
         conversation_id: this.conversation.id,
         from: this.$store.getters.auth.id,
-        to: this.conversation.to,
+        to: this.conversation.from,
         content: this.content,
       });
       this.$emit('closeDialogEvent');

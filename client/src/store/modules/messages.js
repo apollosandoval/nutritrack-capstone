@@ -1,5 +1,8 @@
 import axios from 'axios'
 const URL = require('../api-variables').URL;
+const headers = {
+  'Authorization': localStorage.getItem('token'),
+}
 
 export default {
   state: {
@@ -21,7 +24,7 @@ export default {
     getInbox: async function(context, user) {
       try {
         context.commit('REQUEST_MESSAGES');
-        const res = await axios.get(`${URL}/${user.id}/inbox`);
+        const res = await axios.get(`${URL}/${user.id}/inbox`, {headers});
         context.commit('RECEIVE_INBOX', res.data);
       } catch(err) {
         context.commit('REQUEST_MESSAGES');
@@ -31,7 +34,7 @@ export default {
     getMessagesByConversationId: async function(context, {user, conversationId}) {
       try {
         context.commit('REQUEST_MESSAGES');
-        const res = await axios.get(`${URL}/${user.id}/inbox/${conversationId}`)
+        const res = await axios.get(`${URL}/${user.id}/inbox/${conversationId}`, {headers})
         context.commit('RECEIVE_CONVERSATION_MESSAGES',{messages: res.data, conversationId});
       } catch(err) {
         context.commit('REQUEST_MESSAGES');
@@ -46,14 +49,14 @@ export default {
           subject: message.subject,
           from: message.from,
           to: message.to,
-        });
+        }, {headers});
         // post new message with generated conversation_id
         const res = await axios.post(`${URL}/messages`, {
           conversation_id: conversation.data[0].id,
           from: message.from,
           to: message.to,
           content: message.content,
-        })
+        }, {headers})
         // commit result
         context.commit('RECEIVE_CONVERSATION', {
           conversation: conversation.data[0],
@@ -72,7 +75,7 @@ export default {
           from: message.from,
           to: message.to,
           content: message.content,
-        });
+        }, {headers});
         context.commit('RECEIVE_MESSAGE', res.data);
       } catch(err) {
         context.commit('REQUEST_MESSAGES');

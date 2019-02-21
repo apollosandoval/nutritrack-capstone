@@ -1,5 +1,8 @@
 import axios from 'axios'
 const URL = require('../api-variables').URL;
+const headers = {
+  'Authorization': localStorage.getItem('token'),
+}
 
 export default {
   state: {
@@ -17,7 +20,7 @@ export default {
     getAllClients: async function(context, user) {
       try {
         context.commit('REQUEST_ALL_CONNECTIONS');
-        const res = await axios.get(`${URL}/pro/${user.id}/clients`);
+        const res = await axios.get(`${URL}/pro/${user.id}/clients`, {headers});
         const payload = res.data.reduce((acc, client) => {
           acc.push({
             name: client.name,
@@ -37,7 +40,7 @@ export default {
     getAllAllies: async function(context, user) {
       try {
         context.commit('REQUEST_ALL_CONNECTIONS');
-        const res = await axios.get(`${URL}/${user.id}/allies`);
+        const res = await axios.get(`${URL}/${user.id}/allies`, {headers});
         const payload = res.data.reduce((acc, allie) => {
           acc.push({
             name: allie.name,

@@ -1,13 +1,13 @@
 import axios from 'axios'
 import router from '@/router/router'
+import jwt from 'jsonwebtoken'
 const URL = require('../api-variables').URL;
+
 
 export default {
   state: {
-    user: [],
-    authenticated: false,
-    // TODO: make sure token exists;
-    token: localStorage.getItem('token')
+    user: localStorage.getItem('token') ? jwt.decode(localStorage.getItem('token').substring(7)) : [],
+    authenticated: localStorage.getItem('token') ? jwt.decode(localStorage.getItem('token').substring(7)) : false,
   },
   
   getters: {
@@ -17,10 +17,6 @@ export default {
     authenticated: function(state) {
       return state.authenticated;
     },
-    token: function(state) {
-      // NOTE: this method is currently not being used anywhere
-      return state.token;
-    }
   },
 
   actions: {
@@ -35,21 +31,31 @@ export default {
       }
     },
     login: async function(context, user) {
-      const { email } = user;
+      const { email, password } = user;
       try {
-        const res = await axios.get(`${URL}/login/${email}`);
-        res.data.username = res.data.name.split(" ").join(".").toLowerCase();
-        context.commit('LOGIN', {user: res.data});
-        if (res.data.pro) {
-          router.push({path: `/pro/${res.data.username}`});
+        // NOTE: include token 'if' statement, and make sure that it doesn't already
+        // exist in local storage
+        const res = await axios.post(`${URL}/login`, {
+          email,
+          password,
+        });
+        // NOTE: check if you can await a localStorage.setItem
+        await localStorage.setItem('token', res.data.token);
+        const user = jwt.decode(localStorage.getItem('token').substring(7));
+        user.username = user.name.split(" ").join(".").toLowerCase();
+        context.commit('LOGIN', {user: user});
+        // TODO: place token in local storage as well
+        if (user.pro) {
+          router.push({path: `/pro/${user.username}`});
         } else {
-          router.push({path: `/${res.data.username}`});
+          router.push({path: `/${user.username}`});
         }
       } catch(err) {
         throw new Error(err);
       }
     },
     logout: function(context) {
+      localStorage.removeItem('token');
       context.commit("LOGOUT");
       router.push({path: "/login"});
     },

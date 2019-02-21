@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 9000;
+// packages for Passport.js
+const passport = require('passport');
 
 // express middleware
 app.use(bodyParser.json({
@@ -16,10 +18,13 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cors());
+// Passport.js middleware
+app.use(passport.initialize());
 
 // makes routes available to express app
 var routes_setter = require('./config/routes.js');
-routes_setter(app);
+require('./passport/config')(passport);
+routes_setter(app, passport);
 
 app.listen(PORT, function (err) {
   if (err) {
