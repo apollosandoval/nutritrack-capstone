@@ -39,7 +39,8 @@ export default {
           email,
           password,
         });
-        localStorage.setItem('token', res.data.token);
+        // NOTE: check if you can await a localStorage.setItem
+        await localStorage.setItem('token', res.data.token);
         const user = jwt.decode(localStorage.getItem('token').substring(7));
         user.username = user.name.split(" ").join(".").toLowerCase();
         context.commit('LOGIN', {user: user});
