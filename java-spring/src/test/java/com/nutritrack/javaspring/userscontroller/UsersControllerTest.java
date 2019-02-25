@@ -1,4 +1,4 @@
-package com.nutritrack.javaspring;
+package com.nutritrack.javaspring.userscontroller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,23 +8,29 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class HelloWorldControllerTest {
+class UsersControllerTest {
 
   @Autowired
   private MockMvc mvc;
 
   @Test
-  public void helloWorldTest() throws Exception {
-    RequestBuilder request = MockMvcRequestBuilders.get("/helloworld");
+  public void getAllClients() throws Exception {
+  }
+
+  @Test
+  public void getAllAllies() throws Exception {
+  }
+
+  @Test
+  public void findByUserIdTest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.get("/users/1");
 
     this.mvc.perform(request)
-            .andExpect(status().isOk())
-            .andExpect(content().string("Hello World!"));
-
+            .andExpect(status().isOk());
   }
 }

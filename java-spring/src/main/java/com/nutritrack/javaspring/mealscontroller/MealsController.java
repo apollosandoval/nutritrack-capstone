@@ -1,4 +1,4 @@
-package com.nutritrack.javaspring;
+package com.nutritrack.javaspring.mealscontroller;
 
 import org.springframework.web.bind.annotation.*;
 

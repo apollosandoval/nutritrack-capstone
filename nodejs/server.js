@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 // enables Cross-Origin Resource Sharing for AJAX requests from foreign hosts
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 8080;
 // packages for Passport.js
 const passport = require('passport');
 
