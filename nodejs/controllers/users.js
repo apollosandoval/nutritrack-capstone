@@ -12,12 +12,14 @@ module.exports = {
   },
   
   getAllAllies: (req, res) => {
+    console.log("REQ.PARAMS:", req.params);
     knex('users')
       .join('allies', 'allies.professional', '=', 'users.id')
       .where('allies.client', req.params.user_id)
       .then( data => {
         res.send(data);
       })
+      .catch(err => console.log(err))
   }
 
 };

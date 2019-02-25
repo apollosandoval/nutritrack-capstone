@@ -34,10 +34,15 @@ module.exports = (passport) => {
   }))
 
   passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    knex('users').where('email', jwt_payload.email)
+    knex('users').where('email', jwt_payload.email).first()
       .then(user => {
-        if (user) return done(null, user);
-        else return done(null, false);
+        if (user) {
+          console.log("SUCCESS:", user);
+          return done(null, user);
+        } else {
+          console.log("FAILURE");
+          return done(null, false);
+        }
       })
       .catch(err => done(err, false));
 

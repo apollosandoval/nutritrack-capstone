@@ -44,7 +44,6 @@ export default {
         const user = jwt.decode(localStorage.getItem('token').substring(7));
         user.username = user.name.split(" ").join(".").toLowerCase();
         context.commit('LOGIN', {user: user});
-        // TODO: place token in local storage as well
         if (user.pro) {
           router.push({path: `/pro/${user.username}`});
         } else {
