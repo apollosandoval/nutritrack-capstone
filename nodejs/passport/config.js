@@ -4,6 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const knex = require('../db/knex');
+const bcrypt = require('bcrypt');
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -24,11 +25,15 @@ module.exports = (passport) => {
       .then(user => {
         if (!user) {
           return done(null, false);
-        } else if (user && user.password == password) {
-          return done(null, user);
-        } else {
-          return done(null, false);
         }
+        bcrypt.compare(password, user.password)
+          .then( isMatch => {
+            if (isMatch) {
+              return done(null, user);
+            } else {
+              return (null, false);
+            }
+          })
       })
       .catch(err => done(null, err));
   }))
@@ -37,10 +42,8 @@ module.exports = (passport) => {
     knex('users').where('email', jwt_payload.email).first()
       .then(user => {
         if (user) {
-          console.log("SUCCESS:");
           return done(null, user);
         } else {
-          console.log("FAILURE");
           return done(null, false);
         }
       })
