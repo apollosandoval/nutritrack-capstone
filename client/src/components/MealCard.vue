@@ -48,7 +48,7 @@ export default {
   props: ['meal'],
   methods: {
     deleteCard: function() {
-      this.$store.dispatch('deleteCard', this.meal.id);
+      this.$store.dispatch('deleteCard', {meal_id: this.meal.id, user: this.$store.getters.auth});
     }
   }
 }

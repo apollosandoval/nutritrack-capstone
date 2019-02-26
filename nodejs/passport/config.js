@@ -37,7 +37,7 @@ module.exports = (passport) => {
     knex('users').where('email', jwt_payload.email).first()
       .then(user => {
         if (user) {
-          console.log("SUCCESS:", user);
+          console.log("SUCCESS:");
           return done(null, user);
         } else {
           console.log("FAILURE");

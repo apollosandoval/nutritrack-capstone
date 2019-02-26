@@ -1,7 +1,7 @@
 import axios from 'axios'
 const URL = require('../api-variables').URL;
 const headers = {
-  'Authorization': localStorage.getItem('token'),
+  'Authorization': localStorage.getItem('token') || axios.defaults.headers.common['Authorization'],
 }
 
 export default {

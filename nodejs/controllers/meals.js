@@ -4,7 +4,6 @@ const axios = require('axios')
 module.exports = {
 
   getMealsByDate: (req, res) => {
-    console.log("MEALS REQPARAMS:", req.params);
     knex('meals')
       .where('date', req.params.date)
       .then( data => res.send(data))

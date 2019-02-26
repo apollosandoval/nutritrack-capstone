@@ -1,7 +1,7 @@
 import axios from 'axios'
 const URL = require('../api-variables').URL;
 const headers = {
-  'Authorization': localStorage.getItem('token'),
+  'Authorization': localStorage.getItem('token') || axios.defaults.headers.common['Authorization'],
 }
 
 export default {
@@ -58,11 +58,11 @@ export default {
         throw new Error(err);
       }
     },
-    deleteCard: async function(context, meal_id) {
+    deleteCard: async function(context, {meal_id, user}) {
       try {
         context.commit('REQUEST_MEALS');
         const res = await axios.delete(`${URL}/meals/${meal_id}`, {headers});
-        context.commit('DELETE_CARD', {id: res.data[0]});
+        context.commit('DELETE_CARD', {id: res.data[0], user: user});
       } catch(err) {
         context.commit('REQUEST_MEALS');
         throw new Error(err);
@@ -76,15 +76,20 @@ export default {
       state.isFetching = !state.isFetching;
     },
     RECEIVE_MEALS_BY_DATE: function(state, {meals, user}) {
+      const prev = state.meals[user.id];
       state.isFetching = false;
       state.meals = {
         ...state.meals,
-        [user.id]: meals,
+        [user.id]: [
+          ...meals,
+          ...(prev || [])
+        ],
       }
     },
     DELETE_CARD: function(state, payload) {
+      const { id, user } = payload;
       state.isFetching = false;
-      state.meals = state.meals.filter(meal => meal.id !== payload.id);
+      state.meals[user.id] = state.meals[user.id].filter(meal => meal.id !== id);
     }
   },
 

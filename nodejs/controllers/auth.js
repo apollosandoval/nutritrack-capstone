@@ -14,7 +14,7 @@ module.exports = {
       }
       // Insert bCrypt comparison
       // internal PassportJs login method
-      req.login(user, {session: false}, (err) => {
+      req.logIn(user, {session: false}, (err) => {
         if (err) { res.send(err) }
         // delete password so we don't send it
         delete user.password;
